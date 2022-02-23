@@ -1,0 +1,6 @@
+module Pods_ForeCaster {
+  umbrella header "Pods-ForeCaster-umbrella.h"
+
+  export *
+  module * { export * }
+}
