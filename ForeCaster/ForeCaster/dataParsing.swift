@@ -248,3 +248,10 @@ struct HPeriods : Codable{
     var detailedForecast : String = ""
 }
 //end of daily forecast structs
+func URlForm(_ address : String = "618 Schiller Ave", city : String = "Merion Station", state : String = "PA", zip : String = "19066") -> String{//function reads in an address and outputs a string url
+    var finalURL  = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address="//static portion of the URL that holds the paramaters we dont need to change
+    let URLEnd = "&benchmark=2020&format=json"//same as above but we stick it on the back
+    finalURL = finalURL+address.replacingOccurrences(of: " ", with: "+")+"%2C+"+city.replacingOccurrences(of: " ", with: "+")+"%2C+"+state+"+"+zip+URLEnd//creates the URL replacing spaces with plus signs and adding other things in between that are nessecary for the link to function
+    //print("In URLForm: "+finalURL)//prints for debug
+    return finalURL//returns the url
+}

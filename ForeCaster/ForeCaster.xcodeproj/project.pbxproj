@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A8A315027C7D2150011870B /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8A314F27C7D2150011870B /* dataParsing.swift */; };
 		1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D7927C7D09F0077E87A /* ForeCasterApp.swift */; };
 		1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D7B27C7D09F0077E87A /* ContentView.swift */; };
 		1AE48D7E27C7D0A20077E87A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AE48D7D27C7D0A20077E87A /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A8A314F27C7D2150011870B /* dataParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataParsing.swift; sourceTree = "<group>"; };
 		1AE48D7627C7D09F0077E87A /* ForeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE48D7927C7D09F0077E87A /* ForeCasterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCasterApp.swift; sourceTree = "<group>"; };
 		1AE48D7B27C7D09F0077E87A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,7 +85,6 @@
 				760F9E2C63324A89A81D405A /* Pods-ForeCaster.debug.xcconfig */,
 				22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -120,6 +121,7 @@
 		1AE48D7827C7D09F0077E87A /* ForeCaster */ = {
 			isa = PBXGroup;
 			children = (
+				1A8A314F27C7D2150011870B /* dataParsing.swift */,
 				1AE48D7927C7D09F0077E87A /* ForeCasterApp.swift */,
 				1AE48D7B27C7D09F0077E87A /* ContentView.swift */,
 				1AE48D7D27C7D0A20077E87A /* Assets.xcassets */,
@@ -311,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
+				1A8A315027C7D2150011870B /* dataParsing.swift in Sources */,
 				1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
