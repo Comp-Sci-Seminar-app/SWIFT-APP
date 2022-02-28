@@ -11,7 +11,13 @@ struct AdvancedHourlyView: View {
     @Binding var data : HPeriods
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            VStack{
+                Text("sadness")
+            }.frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height - 20)
+            .background(Color.gray)
+            
+        }.background(Color.blue)
     }
 }
 

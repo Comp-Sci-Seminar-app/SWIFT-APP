@@ -253,5 +253,14 @@ func URlForm(_ address : String = "618 Schiller Ave", city : String = "Merion St
     let URLEnd = "&benchmark=2020&format=json"//same as above but we stick it on the back
     finalURL = finalURL+address.replacingOccurrences(of: " ", with: "+")+"%2C+"+city.replacingOccurrences(of: " ", with: "+")+"%2C+"+state+"+"+zip+URLEnd//creates the URL replacing spaces with plus signs and adding other things in between that are nessecary for the link to function
     //print("In URLForm: "+finalURL)//prints for debug
+    print(finalURL)
     return finalURL//returns the url
+}
+func timeToInt(_ rawTime : String) -> Int {
+    let tTime0 : String = String(rawTime[rawTime.lastIndex(of: " ")!...])
+    let tTime : String = String(tTime0.dropFirst())
+    let tTime2 : String = String(tTime[...tTime.firstIndex(of: ":")!])
+    let tTime3 : String = String(tTime2.dropLast())
+    let time = Int(tTime3) ?? 0
+    return time
 }
