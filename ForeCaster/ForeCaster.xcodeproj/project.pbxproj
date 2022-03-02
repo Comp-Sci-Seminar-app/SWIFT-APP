@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A7C4E1B27CFBE2C0074FB39 /* backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7C4E1A27CFBE2C0074FB39 /* backend.swift */; };
 		1A8A315027C7D2150011870B /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8A314F27C7D2150011870B /* dataParsing.swift */; };
 		1A8A315227C7D7F50011870B /* AdvancedHourlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8A315127C7D7F50011870B /* AdvancedHourlyView.swift */; };
 		1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D7927C7D09F0077E87A /* ForeCasterApp.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A7C4E1A27CFBE2C0074FB39 /* backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backend.swift; sourceTree = "<group>"; };
 		1A8A314F27C7D2150011870B /* dataParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataParsing.swift; sourceTree = "<group>"; };
 		1A8A315127C7D7F50011870B /* AdvancedHourlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedHourlyView.swift; sourceTree = "<group>"; };
 		1AE48D7627C7D09F0077E87A /* ForeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				1AE48D8227C7D0A20077E87A /* Info.plist */,
 				1AE48D7F27C7D0A20077E87A /* Preview Content */,
 				1A8A315127C7D7F50011870B /* AdvancedHourlyView.swift */,
+				1A7C4E1A27CFBE2C0074FB39 /* backend.swift */,
 			);
 			path = ForeCaster;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
+				1A7C4E1B27CFBE2C0074FB39 /* backend.swift in Sources */,
 				1A8A315027C7D2150011870B /* dataParsing.swift in Sources */,
 				1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */,
 				1A8A315227C7D7F50011870B /* AdvancedHourlyView.swift in Sources */,

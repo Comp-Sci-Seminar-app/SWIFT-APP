@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
+
 func makeTimeNice(_ evilTime: String)-> String{
     @AppStorage("24h") var twentyFourHourClock = true
     //2022-02-24T(11)10:00:00-05:00
@@ -66,6 +68,9 @@ struct ContentView: View {
     @StateObject var g = Decoded()
     @StateObject var f = FetchData()
     @AppStorage("24h") var hours : Bool = true
+    init(){
+        Theme.navigationBarColors(background: .clear, titleColor: .clear)
+    }
     var body: some View {
          NavigationView{
              List{
