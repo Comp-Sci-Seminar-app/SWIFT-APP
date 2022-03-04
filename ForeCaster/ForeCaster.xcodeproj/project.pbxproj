@@ -14,6 +14,18 @@
 		1AE48D8C27C7D0A20077E87A /* ForeCasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D8B27C7D0A20077E87A /* ForeCasterTests.swift */; };
 		1AE48D9727C7D0A20077E87A /* ForeCasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */; };
 		418DE420F7143A7BC95E52BD /* libPods-ForeCaster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */; };
+		6BE7032F27C7D25E00CC8CBF /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7032E27C7D25E00CC8CBF /* dataParsing.swift */; };
+		6BE7033927C7D2B200CC8CBF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033027C7D2B000CC8CBF /* LocationManager.swift */; };
+		6BE7033A27C7D2B200CC8CBF /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033127C7D2B000CC8CBF /* CreateTaskView.swift */; };
+		6BE7033B27C7D2B200CC8CBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033227C7D2B000CC8CBF /* AppDelegate.swift */; };
+		6BE7033C27C7D2B200CC8CBF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033327C7D2B100CC8CBF /* Task.swift */; };
+		6BE7033D27C7D2B200CC8CBF /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033427C7D2B100CC8CBF /* TaskListView.swift */; };
+		6BE7033E27C7D2B200CC8CBF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033527C7D2B100CC8CBF /* NotificationManager.swift */; };
+		6BE7033F27C7D2B200CC8CBF /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033627C7D2B100CC8CBF /* TaskManager.swift */; };
+		6BE7034027C7D2B200CC8CBF /* TaskPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033727C7D2B100CC8CBF /* TaskPersistenceManager.swift */; };
+		6BE7034127C7D2B200CC8CBF /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7033827C7D2B200CC8CBF /* NotificationSettingsView.swift */; };
+		6BE7034827C7D6C000CC8CBF /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7034727C7D6C000CC8CBF /* WeatherView.swift */; };
+		6BE7034A27C7D6E000CC8CBF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7034927C7D6E000CC8CBF /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +59,18 @@
 		1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCasterUITests.swift; sourceTree = "<group>"; };
 		1AE48D9827C7D0A20077E87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForeCaster.release.xcconfig"; path = "Target Support Files/Pods-ForeCaster/Pods-ForeCaster.release.xcconfig"; sourceTree = "<group>"; };
+		6BE7032E27C7D25E00CC8CBF /* dataParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataParsing.swift; sourceTree = "<group>"; };
+		6BE7033027C7D2B000CC8CBF /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		6BE7033127C7D2B000CC8CBF /* CreateTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
+		6BE7033227C7D2B000CC8CBF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6BE7033327C7D2B100CC8CBF /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		6BE7033427C7D2B100CC8CBF /* TaskListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		6BE7033527C7D2B100CC8CBF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		6BE7033627C7D2B100CC8CBF /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		6BE7033727C7D2B100CC8CBF /* TaskPersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskPersistenceManager.swift; sourceTree = "<group>"; };
+		6BE7033827C7D2B200CC8CBF /* NotificationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
+		6BE7034727C7D6C000CC8CBF /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		6BE7034927C7D6E000CC8CBF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		760F9E2C63324A89A81D405A /* Pods-ForeCaster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForeCaster.debug.xcconfig"; path = "Target Support Files/Pods-ForeCaster/Pods-ForeCaster.debug.xcconfig"; sourceTree = "<group>"; };
 		F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ForeCaster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,7 +107,6 @@
 				760F9E2C63324A89A81D405A /* Pods-ForeCaster.debug.xcconfig */,
 				22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -121,7 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				1AE48D7927C7D09F0077E87A /* ForeCasterApp.swift */,
-				1AE48D7B27C7D09F0077E87A /* ContentView.swift */,
+				6BE7034227C7D2EF00CC8CBF /* Main Weather */,
+				6BE7034327C7D31D00CC8CBF /* Notifications */,
 				1AE48D7D27C7D0A20077E87A /* Assets.xcassets */,
 				1AE48D8227C7D0A20077E87A /* Info.plist */,
 				1AE48D7F27C7D0A20077E87A /* Preview Content */,
@@ -153,6 +177,49 @@
 				1AE48D9827C7D0A20077E87A /* Info.plist */,
 			);
 			path = ForeCasterUITests;
+			sourceTree = "<group>";
+		};
+		6BE7034227C7D2EF00CC8CBF /* Main Weather */ = {
+			isa = PBXGroup;
+			children = (
+				1AE48D7B27C7D09F0077E87A /* ContentView.swift */,
+				6BE7032E27C7D25E00CC8CBF /* dataParsing.swift */,
+				6BE7034727C7D6C000CC8CBF /* WeatherView.swift */,
+				6BE7034927C7D6E000CC8CBF /* SettingsView.swift */,
+			);
+			path = "Main Weather";
+			sourceTree = "<group>";
+		};
+		6BE7034327C7D31D00CC8CBF /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				6BE7033227C7D2B000CC8CBF /* AppDelegate.swift */,
+				6BE7033327C7D2B100CC8CBF /* Task.swift */,
+				6BE7034627C7D38100CC8CBF /* Views */,
+				6BE7034427C7D33900CC8CBF /* Managers */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		6BE7034427C7D33900CC8CBF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6BE7033027C7D2B000CC8CBF /* LocationManager.swift */,
+				6BE7033527C7D2B100CC8CBF /* NotificationManager.swift */,
+				6BE7033627C7D2B100CC8CBF /* TaskManager.swift */,
+				6BE7033727C7D2B100CC8CBF /* TaskPersistenceManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		6BE7034627C7D38100CC8CBF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6BE7033127C7D2B000CC8CBF /* CreateTaskView.swift */,
+				6BE7033827C7D2B200CC8CBF /* NotificationSettingsView.swift */,
+				6BE7033427C7D2B100CC8CBF /* TaskListView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,8 +377,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BE7034127C7D2B200CC8CBF /* NotificationSettingsView.swift in Sources */,
+				6BE7033B27C7D2B200CC8CBF /* AppDelegate.swift in Sources */,
+				6BE7033927C7D2B200CC8CBF /* LocationManager.swift in Sources */,
+				6BE7033F27C7D2B200CC8CBF /* TaskManager.swift in Sources */,
+				6BE7033A27C7D2B200CC8CBF /* CreateTaskView.swift in Sources */,
+				6BE7034827C7D6C000CC8CBF /* WeatherView.swift in Sources */,
+				6BE7033E27C7D2B200CC8CBF /* NotificationManager.swift in Sources */,
+				6BE7034A27C7D6E000CC8CBF /* SettingsView.swift in Sources */,
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
+				6BE7032F27C7D25E00CC8CBF /* dataParsing.swift in Sources */,
+				6BE7033C27C7D2B200CC8CBF /* Task.swift in Sources */,
 				1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */,
+				6BE7034027C7D2B200CC8CBF /* TaskPersistenceManager.swift in Sources */,
+				6BE7033D27C7D2B200CC8CBF /* TaskListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
