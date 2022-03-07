@@ -104,4 +104,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-//this will all be replaced
