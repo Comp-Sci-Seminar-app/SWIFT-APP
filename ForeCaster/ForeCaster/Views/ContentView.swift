@@ -98,7 +98,7 @@ struct ContentView: View {
     @State var displayDayAfter = false//this too
     @State var offset: CGPoint = .zero// this is the offset of the scroll view
     @State var coeffOfWidth = (UIScreen.main.bounds.width/2)-73
-    @AppStorage("sheet") private var showingSheet = true
+    @State private var showingSheet = true
     init(){
         Theme.navigationBarColors(background: .clear, titleColor: .clear)
     }
