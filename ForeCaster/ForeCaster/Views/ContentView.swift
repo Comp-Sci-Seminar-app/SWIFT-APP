@@ -145,31 +145,7 @@ struct ContentView: View {
                         .sheet(isPresented: $showingSheet){
                             LocationRequestView(showSheet: $showingSheet)
                         }
-                        VStack{//Contains the text that is being changed
-                            Spacer().frame(height: 5)
-                            HStack{
-                                Text("This text is disapearing")
-                                    .opacity(1-(Double(heightOffset)/85))
-                                    .foregroundColor(.white)//slowly dissapears as user scrolls
-                                Spacer()
-                                Text("This Text is appearing")
-                                    .opacity(0+(Double(heightOffset)/85))
-                                    .foregroundColor(.white)
-                            }
-                            
-                            
-                            if heightOffset < 87{//keeps on screen till it reaches the point that i want it to stop at
-                                Text("This text is moving")
-                                    .position(x: 73+CGFloat(positiveOnly(Double(heightOffset))*(Double(coeffOfWidth)/87)), y:60-CGFloat(positiveOnly(Double(heightOffset)))).foregroundColor(.white)//moves with the scrolling
-                            }
-                            if heightOffset >= 87{//makes the text appear in place of the other at the point i want it
-                                Text("This text is moving").position(x: (screenWidth/2), y: -28).foregroundColor(.white)//puts the same text as above in the same spot
-                            }
-                            
-                            
-                            Text("\(heightOffset)").foregroundColor(.white)//used for figuring out values for stuff
-                            Spacer()
-                        }
+                       
                         
                         VStack{
                             Spacer().frame(width: 100, height: 25, alignment: .center)//Spacer so the text isnt covered by the scrolling stuff
@@ -232,7 +208,32 @@ struct ContentView: View {
                             }
                             .coordinateSpace(name: "scroll")//not sure about this either
                         }
-                        
+                    
+                        VStack{//Contains the text that is being changed
+                            Spacer().frame(height: 5)
+                            ZStack{
+                                DIssapearingView(data: f.responses.current)
+                                    .opacity(1-(Double(heightOffset)/85))
+                                    .foregroundColor(.white)//slowly dissapears as user scrolls
+                                //Spacer()
+                                AppearingView(data: f.responses.current)
+                                    .opacity(0+(Double(heightOffset)/85))
+                                    .foregroundColor(.white)
+                            }
+                            
+                            
+                      //      if heightOffset < 87{//keeps on screen till it reaches the point that i want it to stop at
+                     //           Text("This text is moving")
+                     //               .position(x: 73+CGFloat(positiveOnly(Double(heightOffset))*(Double(coeffOfWidth)/87)), y:60-CGFloat(positiveOnly(Double(heightOffset)))).foregroundColor(.white)//moves with the scrolling
+                     //       }
+                     //       if heightOffset >= 87{//makes the text appear in place of the other at the point i want it
+                    //            Text("This text is moving").position(x: (screenWidth/2), y: -28).foregroundColor(.white)//puts the same text as above in the same spot
+                    //        }
+                            
+                            
+                           // Text("\(heightOffset)").foregroundColor(.white)//used for figuring out values for stuff
+                            Spacer()
+                        }
                     }
                    
                 //.edgesIgnoringSafeArea(.all)//fills out the screen
