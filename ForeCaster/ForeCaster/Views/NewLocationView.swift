@@ -15,6 +15,7 @@ struct NewLocationView: View {
     @State var state : String = ""
     @State var nickname : String = ""
     @State private var CVshowing = false
+    @Binding var showSheet : Bool
     @AppStorage("customLocations")
     private var customLocations: Data = Data()
     
@@ -46,6 +47,7 @@ struct NewLocationView: View {
                     guard let locationData = try? JSONEncoder().encode(locationList) else{return}
                     customLocations = locationData
                 }
+                showSheet = false
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Submit Address").font(.title2)
@@ -59,11 +61,5 @@ struct NewLocationView: View {
         }.padding()
         .background(Color(.systemBlue))
         .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct NewLocationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewLocationView()
     }
 }

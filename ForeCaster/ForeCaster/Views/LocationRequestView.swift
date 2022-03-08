@@ -13,6 +13,7 @@ struct LocationRequestView: View {
     @State private var LRshowing = false
     @Environment(\.presentationMode) private var presentationMode
     @State private var showOtherSheet = false
+    @Binding var showSheet : Bool
 
     var body: some View {
         NavigationView{
@@ -61,7 +62,7 @@ struct LocationRequestView: View {
                     
                      
                 }.sheet(isPresented: $showOtherSheet) {
-                    NewLocationView()
+                    NewLocationView(showSheet: $showSheet)
                 }
                 //}
                 //else{
@@ -73,8 +74,3 @@ struct LocationRequestView: View {
     }
 }
 
-struct LocationRequestView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationRequestView()
-    }
-}

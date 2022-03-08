@@ -210,7 +210,7 @@ struct ContentView: View {
                         }
                         
                     }.sheet(isPresented: $showingSheet){
-                        LocationRequestView()
+                        LocationRequestView(showSheet: $showingSheet)
                     }
                 //.edgesIgnoringSafeArea(.all)//fills out the screen
                 
