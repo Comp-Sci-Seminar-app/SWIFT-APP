@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct LocationRequestView: View {
+    @ObservedObject var locationManager = LocationManager.shared
     var body: some View {
+        Group{
+            if(locationManager.userLocation == nil){
         ZStack{
             Color(.systemBlue).ignoresSafeArea()
             VStack{
@@ -17,7 +20,6 @@ struct LocationRequestView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
-                    
                 Text("Allow access to location")
                 Text("Locations can be entered manualy without location services")
                     .font(.caption2)
@@ -47,6 +49,10 @@ struct LocationRequestView: View {
                 }
                 Spacer()
             }.foregroundColor(.white)
+        }
+            }else{
+                ContentView()
+            }
         }
     }
 }

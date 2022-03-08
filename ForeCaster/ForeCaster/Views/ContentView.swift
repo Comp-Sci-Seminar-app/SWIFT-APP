@@ -97,6 +97,8 @@ struct ContentView: View {
     @State var displayDayAfter = false//this too
     @State var offset: CGPoint = .zero// this is the offset of the scroll view
     @State var coeffOfWidth = (UIScreen.main.bounds.width/2)-73
+    
+    
     var body: some View {
         let screenWidth = UIScreen.main.bounds.width
         //let screenHeight = UIScreen.main.bounds.height
@@ -201,10 +203,11 @@ struct ContentView: View {
                     }
                     
                 }//.edgesIgnoringSafeArea(.all)//fills out the screen
-            }
+                 }
         }
     }
-}
+    }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

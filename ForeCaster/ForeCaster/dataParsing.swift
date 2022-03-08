@@ -12,12 +12,20 @@ class Decoded : ObservableObject{
     @Published var weather = WResponse()//variable containing the weather json's results
     @Published var dForecast = DForecast()//variable containing the daily forcast json's results
     @Published var hForecast = HForecast()//variable containing the hourly forcast json's results
+    var locationManager = LocationManager.shared
     init() {
+        if locationManager.userLocation == nil{
         decodeGeo()//starts the decoding process on initilization
+        }
+        else{
+            
+            decodeWeather(link: "https://api.weather.gov/points/\(locationManager.userLocation?.coordinate.latitude ?? 40),\(locationManager.userLocation?.coordinate.longitude ?? -74)")
+        }
     }
+    
     func decodeGeo(){//decodes the geocoding json given inital URL
         
-        guard let gurl = URL(string: addressURL) else {print("Bad link");return}//declares the URL for the json
+        guard let gurl = URL(string: addressURL) else {print("Bad link: \(addressURL)");return}//declares the URL for the json
         
         
         URLSession.shared.dataTask(with: gurl) { (data, response, errors) in
@@ -38,10 +46,14 @@ class Decoded : ObservableObject{
             }
         }.resume()
     }
+    
+    
+    
+    
     var link = ""
     func decodeWeather(link : String){
         
-        guard let wurl = URL(string: link) else {print("FetchWeather Error: "+link);return}//declares URL for use
+        guard let wurl = URL(string: link) else {print("Bad Link: \(link)");return}//declares URL for use
         
         URLSession.shared.dataTask(with: wurl) { (data, response, errors) in
             guard let Data = data else {print("Error");return}//data
@@ -248,6 +260,7 @@ struct HPeriods : Codable{
     var detailedForecast : String = ""
 }
 //end of daily forecast structs
+
 func URlForm(_ address : String = "618 Schiller Ave", city : String = "Merion Station", state : String = "PA", zip : String = "19066") -> String{//function reads in an address and outputs a string url
     var finalURL  = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address="//static portion of the URL that holds the paramaters we dont need to change
     let URLEnd = "&benchmark=2020&format=json"//same as above but we stick it on the back
