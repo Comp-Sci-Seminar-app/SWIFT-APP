@@ -118,9 +118,33 @@ struct ContentView: View {
               //  }
                 
                     ZStack {//so i can put a rectangle as the background and stuff like that
-                        Rectangle().fill(Color(.systemBlue))
+                        //for the background
+                        ZStack{
+                            
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                        .background(
+                            Group{
+                                //checks if it is night
+                                if (timeToInt(f.responses.location.localtime) < 19 && timeToInt(f.responses.location.localtime) > 5){
+                                    Image("\(f.responses.current.condition?.code ?? 1000)")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                    
+                                    //if it is night, uses a different image
+                                }else{
+                                    Image("night")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                }
+                            }
+                            
+                        )
                             .edgesIgnoringSafeArea(.all)
-                            .brightness(0.45-positiveOnly(Double(heightOffset)/100))
+                        .brightness(0.2-positiveOnly(Double(heightOffset)/300))
+                        .sheet(isPresented: $showingSheet){
+                            LocationRequestView(showSheet: $showingSheet)
+                        }
                         VStack{//Contains the text that is being changed
                             Spacer().frame(height: 5)
                             HStack{
@@ -209,9 +233,8 @@ struct ContentView: View {
                             .coordinateSpace(name: "scroll")//not sure about this either
                         }
                         
-                    }.sheet(isPresented: $showingSheet){
-                        LocationRequestView(showSheet: $showingSheet)
                     }
+                   
                 //.edgesIgnoringSafeArea(.all)//fills out the screen
                 
             }
@@ -224,4 +247,14 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+//FAR from the best way to do it, but its how im gonna do it so fight me!
+func timeToInt(_ rawTime : String) -> Int {
+    let tTime0 : String = String(rawTime[rawTime.lastIndex(of: " ")!...])
+    let tTime : String = String(tTime0.dropFirst())
+    let tTime2 : String = String(tTime[...tTime.firstIndex(of: ":")!])
+    let tTime3 : String = String(tTime2.dropLast())
+    let time = Int(tTime3) ?? 0
+    return time
 }

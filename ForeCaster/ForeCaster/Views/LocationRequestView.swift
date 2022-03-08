@@ -47,7 +47,6 @@ struct LocationRequestView: View {
                             Button(action: {
                                 print("L")
                                 showOtherSheet = true
-                                presentationMode.wrappedValue.dismiss()
                             }, label: {
                                 Text("Deny").frame(width: 120)
                             }).padding()
