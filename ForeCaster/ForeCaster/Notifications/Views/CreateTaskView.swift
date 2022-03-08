@@ -3,11 +3,11 @@ import MapKit
 
 struct CreateTaskView: View {
     @State var taskName: String = ""
-    @State var reminderEnabled = false
+    @State var reminderEnabled = true
     @State var selectedTrigger = ReminderType.time
     @State var timeDurationIndex: Int = 0
     @State private var dateTrigger = Date()
-    @State private var shouldRepeat = false
+    @State private var shouldRepeat = true
     @State private var latitude: String = ""
     @State private var longitude: String = ""
     @State private var radius: String = ""
@@ -56,12 +56,16 @@ struct CreateTaskView: View {
                     }
                     .padding()
                 }
+                Button("Create 1 minute notification") {
+                    TaskManager.shared.addNewTask("1 minute notification", makeReminder())
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }
     }
-    
+ 
     func makeReminder() -> Reminder? {
         guard reminderEnabled else {
             return nil
