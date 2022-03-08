@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A572AFF27D7A2D300004FD8 /* AdvancedHourlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A572AFE27D7A2D300004FD8 /* AdvancedHourlyView.swift */; };
+		1A572B0127D7A2DE00004FD8 /* backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A572B0027D7A2DD00004FD8 /* backend.swift */; };
 		1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D7927C7D09F0077E87A /* ForeCasterApp.swift */; };
 		1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D7B27C7D09F0077E87A /* ContentView.swift */; };
 		1AE48D7E27C7D0A20077E87A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AE48D7D27C7D0A20077E87A /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A572AFE27D7A2D300004FD8 /* AdvancedHourlyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvancedHourlyView.swift; path = ForeCaster/AdvancedHourlyView.swift; sourceTree = SOURCE_ROOT; };
+		1A572B0027D7A2DD00004FD8 /* backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = backend.swift; path = ForeCaster/backend.swift; sourceTree = SOURCE_ROOT; };
 		1AE48D7627C7D09F0077E87A /* ForeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE48D7927C7D09F0077E87A /* ForeCasterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCasterApp.swift; sourceTree = "<group>"; };
 		1AE48D7B27C7D09F0077E87A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 		F0A026ED27C7D28C00D6616B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1A572B0027D7A2DD00004FD8 /* backend.swift */,
+				1A572AFE27D7A2D300004FD8 /* AdvancedHourlyView.swift */,
 				1AE48D7B27C7D09F0077E87A /* ContentView.swift */,
 				F029D9B727D651D000F2AB6E /* LocationRequestView.swift */,
 				F029D9B927D7856000F2AB6E /* NewLocationView.swift */,
@@ -336,9 +342,11 @@
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
 				F029D9BA27D7856000F2AB6E /* NewLocationView.swift in Sources */,
 				F0A026EC27C7D26700D6616B /* dataParsing.swift in Sources */,
+				1A572B0127D7A2DE00004FD8 /* backend.swift in Sources */,
 				F029D9BC27D78FEA00F2AB6E /* CustomLocation.swift in Sources */,
 				F029D9B827D651D000F2AB6E /* LocationRequestView.swift in Sources */,
 				1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */,
+				1A572AFF27D7A2D300004FD8 /* AdvancedHourlyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

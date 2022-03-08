@@ -14,11 +14,12 @@ struct NewLocationView: View {
     @State var city : String = ""
     @State var state : String = ""
     @State var nickname : String = ""
+    @State private var CVshowing = false
     @AppStorage("customLocations")
     private var customLocations: Data = Data()
     
     @State var locationList = [customLocation("", nickname: "")]
-    
+    @Environment(\.presentationMode) private var presentationMode
     var body: some View {
         VStack{
             Text("Enter Address").font(.title)
@@ -45,6 +46,7 @@ struct NewLocationView: View {
                     guard let locationData = try? JSONEncoder().encode(locationList) else{return}
                     customLocations = locationData
                 }
+                presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Submit Address").font(.title2)
                     .frame(width: 250, height: 50, alignment: .center)

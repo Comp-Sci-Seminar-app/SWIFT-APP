@@ -13,7 +13,8 @@ import SwiftUI
 struct ForeCasterApp: App {
     var body: some Scene {
         WindowGroup {
-            LocationRequestView()
+            
+            ContentView()
         }
     }
 }
