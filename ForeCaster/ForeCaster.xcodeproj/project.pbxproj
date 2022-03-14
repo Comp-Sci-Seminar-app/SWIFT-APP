@@ -17,7 +17,6 @@
 		1AE48D8127C7D0A20077E87A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AE48D8027C7D0A20077E87A /* Preview Assets.xcassets */; };
 		1AE48D8C27C7D0A20077E87A /* ForeCasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D8B27C7D0A20077E87A /* ForeCasterTests.swift */; };
 		1AE48D9727C7D0A20077E87A /* ForeCasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */; };
-		1AEE886727DA30E6003101C6 /* Notifications in Resources */ = {isa = PBXBuildFile; fileRef = 1AEE886627DA30E6003101C6 /* Notifications */; };
 		418DE420F7143A7BC95E52BD /* libPods-ForeCaster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */; };
 		F029D9B627D64C9400F2AB6E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029D9B527D64C9400F2AB6E /* LocationManager.swift */; };
 		F029D9B827D651D000F2AB6E /* LocationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029D9B727D651D000F2AB6E /* LocationRequestView.swift */; };
@@ -60,7 +59,6 @@
 		1AE48D9227C7D0A20077E87A /* ForeCasterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForeCasterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCasterUITests.swift; sourceTree = "<group>"; };
 		1AE48D9827C7D0A20077E87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AEE886627DA30E6003101C6 /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Notifications; sourceTree = "<group>"; };
 		22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForeCaster.release.xcconfig"; path = "Target Support Files/Pods-ForeCaster/Pods-ForeCaster.release.xcconfig"; sourceTree = "<group>"; };
 		760F9E2C63324A89A81D405A /* Pods-ForeCaster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForeCaster.debug.xcconfig"; path = "Target Support Files/Pods-ForeCaster/Pods-ForeCaster.debug.xcconfig"; sourceTree = "<group>"; };
 		F029D9B527D64C9400F2AB6E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 		1AE48D7827C7D09F0077E87A /* ForeCaster */ = {
 			isa = PBXGroup;
 			children = (
-				1AEE886627DA30E6003101C6 /* Notifications */,
 				F0A026ED27C7D28C00D6616B /* Views */,
 				F0A026EB27C7D26700D6616B /* dataParsing.swift */,
 				1A572B0027D7A2DD00004FD8 /* backend.swift */,
@@ -297,7 +294,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AE48D8127C7D0A20077E87A /* Preview Assets.xcassets in Resources */,
-				1AEE886727DA30E6003101C6 /* Notifications in Resources */,
 				1AE48D7E27C7D0A20077E87A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
