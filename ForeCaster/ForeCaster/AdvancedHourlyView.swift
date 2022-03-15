@@ -13,20 +13,23 @@ struct AdvancedHourlyView: View {
     
     var body: some View {
         
-        ZStack{
-            
+   
             ZStack{
+                ZStack{
                 VStack{
                     Spacer()
                     HStack{
                         Text("Forcast for \(makeTimeNice(data.startTime))")
                         KFImage(URL(string: data.icon)).resizable().frame(width: 50, height: 50).clipShape(Circle())
-                    }.frame(width: UIScreen.main.bounds.width - 80, height: 50).background(Color.customGray.opacity(0.8)).cornerRadius(10)
+                    }.frame(width: UIScreen.main.bounds.width - 80, height: 50).background(Color.customGray.opacity(0.6)).cornerRadius(10)
                     Spacer()
                     VStack{
+                        Spacer()
+
                         HStack{
                             Text("Short Forcast: \(data.shortForecast ?? "no data bro")")
-                        }.frame(width: UIScreen.main.bounds.width - 80, height: 95).background(Color.customGray.opacity(0.8)).cornerRadius(15)
+                        }.frame(width: UIScreen.main.bounds.width - 80, height: 95).background(Color.customGray.opacity(0.6)).cornerRadius(15)
+                        Spacer()
                         HStack{
                             Spacer()
                             Spacer()
@@ -35,14 +38,14 @@ struct AdvancedHourlyView: View {
                                 Text("Wind speed:")
                                 Text("\(data.windSpeed)")
                                 Spacer()
-                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray).cornerRadius(15)
+                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray.opacity(0.6)).cornerRadius(15)
                             Spacer()
                             VStack{
                                 Spacer()
                                 Text("Wind direction: ")
                                 Text("\(data.windDirection)")
                                 Spacer()
-                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray).cornerRadius(15)
+                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray.opacity(0.6)).cornerRadius(15)
                             Spacer()
                             Spacer()
                         }.frame(width: UIScreen.main.bounds.width - 80, height: 95)
@@ -55,7 +58,7 @@ struct AdvancedHourlyView: View {
                                 Text("Temperature:")
                                 Text("\(data.temperature) degrees f")
                                 Spacer()
-                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray).cornerRadius(15)
+                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray.opacity(0.6)).cornerRadius(15)
                             Spacer()
                             VStack{
                                 Spacer()
@@ -69,26 +72,33 @@ struct AdvancedHourlyView: View {
                                     }
                                 }
                                 Spacer()
-                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray).cornerRadius(15)
+                            }.frame(width: UIScreen.main.bounds.width - 180, height: 95).background(Color.customGray.opacity(0.6)).cornerRadius(15)
                             Spacer()
                             Spacer()
                         }.frame(width: UIScreen.main.bounds.width - 80, height: 95)
+                        Spacer()
                         Spacer()
                     }.frame(width: UIScreen.main.bounds.width - 80, height: 300)
                     Spacer()
                     Spacer()
                     Spacer()
                 }.frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - 60)
-                .background(Color.customBlue).cornerRadius(30)
-            }.frame(width: UIScreen.main.bounds.width-30, height: UIScreen.main.bounds.height-30).background(Color.customGray).cornerRadius(30)
-            VStack{
-                HStack{
-                    Image("back").resizable().frame(width: 50, height: 50)
+                VStack{
+                    HStack{
+                        Image("back").resizable().frame(width: 50, height: 50)
+                        Spacer()
+                    }
                     Spacer()
                 }
-                Spacer()
-            }
-        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).background(Color.customBlue).ignoresSafeArea(.all)
+                }
+            }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).ignoresSafeArea(.all)
+            .background(Image("background")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                            .ignoresSafeArea(.all)
+            )
+            
+      
     }
 }
 
