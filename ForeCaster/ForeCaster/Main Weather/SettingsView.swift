@@ -16,7 +16,7 @@ struct SettingsView: View {
     @StateObject var locationManager = LocationManager()
     
     let timeDurations: [Int] = Array(1...60)
-    func makeReminder(time: Int) -> Reminder? {
+    func makeReminderTime(time: Int) -> Reminder? {
         guard reminderEnabled else {
             return nil
         }
@@ -24,9 +24,29 @@ struct SettingsView: View {
         var reminder = Reminder()
         reminder.reminderType = selectedTrigger
         reminder.timeInterval = TimeInterval(timeDurations[timeDurationIndex] * 60)
-        reminder.repeats = shouldRepeat
+        reminder.repeats = true
         return reminder
     }
+    
+    @State var selectedTriggerCalendar = ReminderType.calendar
+    @State private var dateTrigger = Date()
+    @State private var latitude: String = ""
+    @State private var longitude: String = ""
+    @State private var radius: String = ""
+    
+    
+    func makeReminderCalendar() -> Reminder? {
+        guard reminderEnabled else {
+            return nil
+        }
+        var reminder = Reminder()
+        reminder.reminderType = selectedTrigger
+        reminder.date = dateTrigger
+        reminder.repeats = false
+        return reminder
+    }
+    
+    
     
     var body: some View{
         VStack{
@@ -36,12 +56,17 @@ struct SettingsView: View {
             .padding(.vertical)
  
             Button("Create 1 minute notification") {
-                TaskManager.shared.addNewTask("1 minute notification", makeReminder(time: 0))
+                TaskManager.shared.addNewTask("1 minute notification", makeReminderTime(time: 0))
                 presentationMode.wrappedValue.dismiss()
             }
             
             Button("Create 2 minute notification") {
-                TaskManager.shared.addNewTask("2 minute notification", makeReminder(time: 1))
+                TaskManager.shared.addNewTask("2 minute notification", makeReminderTime(time: 1))
+                presentationMode.wrappedValue.dismiss()
+            }
+            
+            Button("Test Date Based") {
+                TaskManager.shared.addNewTask("n", makeReminderCalendar())
                 presentationMode.wrappedValue.dismiss()
             }
         }
