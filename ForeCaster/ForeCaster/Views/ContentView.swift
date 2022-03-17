@@ -93,12 +93,11 @@ struct ContentView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var g = Decoded()// new API
     @StateObject var f = FetchData()// old API
-    @State var displayCurrentHours = false//Used in old app, probably gonna delete
-    @State var displayTommorrowHours = false//this too
-    @State var displayDayAfter = false//this too
     @State var offset: CGPoint = .zero// this is the offset of the scroll view
     @State var coeffOfWidth = (UIScreen.main.bounds.width/2)-73
     @State private var showingSheet = true
+    @State var showingHours = [false, false, false, false, false, false, false]
+    let hoursLeft = getHowManyHoursAreLeftInToday()
     init(){
         Theme.navigationBarColors(background: .clear, titleColor: .clear)
     }
@@ -113,129 +112,486 @@ struct ContentView: View {
         let heightOffset = 90+offset.y//the normal offset is 90 off because of how spacers work in scrollviews, this makes it easier to use the value
         NavigationView{
             Group{
-               // if locationManager.userLocation == nil{
-              //      LocationRequestView()
-              //  }
+                // if locationManager.userLocation == nil{
+                //      LocationRequestView()
+                //  }
                 
-                    ZStack {//so i can put a rectangle as the background and stuff like that
-                        //for the background
-                        ZStack{
-                            
-                        }
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                        .background(
-                            Group{
-                                //checks if it is night
-                                if (timeToInt(f.responses.location.localtime) < 19 && timeToInt(f.responses.location.localtime) > 5){
-                                    Image("\(f.responses.current.condition?.code ?? 1000)")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                    
-                                    //if it is night, uses a different image
-                                }else{
-                                    Image("night")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                }
-                            }
-                            
-                        )
-                            .edgesIgnoringSafeArea(.all)
-                        .brightness(0.2-positiveOnly(Double(heightOffset)/300))
-                        .sheet(isPresented: $showingSheet){
-                            LocationRequestView(showSheet: $showingSheet)
-                        }
-                       
+                ZStack {//so i can put a rectangle as the background and stuff like that
+                    //for the background
+                    ZStack{
                         
-                        VStack{
-                            Spacer().frame(width: 100, height: 25, alignment: .center)//Spacer so the text isnt covered by the scrolling stuff
-                            ScrollView(showsIndicators: false){//scrollview being tracked
-                                Spacer().frame(width: 100, height: 90, alignment: .center)//keeps the scrollview from going on top of the moving text
+                    }
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .background(
+                        Group{
+                            //checks if it is night
+                            if (timeToInt(f.responses.location.localtime) < 19 && timeToInt(f.responses.location.localtime) > 5){
+                                Image("\(f.responses.current.condition?.code ?? 1000)")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
                                 
-                                
-                                ScrollView(.horizontal, showsIndicators: false) {//scrollview with the actual info
-                                    //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
-                                    HStack{//the actual info
-                                        Spacer().frame(width: 5)//Keeps the blocks off the side of the screen and looks 100x better
-                                        ForEach(0..<allDaily.count){index in//goes through all the info
-                                            VStack{//one block containing text in the horizontal scrollview
-                                                
-                                                Text(allDaily[index].name).foregroundColor(.white)
-                                                Text(" \(Image(systemName: "thermometer")) \(allDaily[index].temperature) \(allDaily[index].temperatureUnit) ").foregroundColor(.white)
-                                                Text(" \(Image(systemName: "wind")) \(allDaily[index].windSpeed) \(allDaily[index].windDirection) ").foregroundColor(.white)
-                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
-                                            }.background(Color.blue.opacity(0.5))
-                                            .cornerRadius(10)
-                                            .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
-                                            Spacer()//keeps the blocks seperate
-                                        }
-                                    }
+                                //if it is night, uses a different image
+                            }else{
+                                Image("night")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            }
+                        }
+                        
+                    )
+                    .edgesIgnoringSafeArea(.all)
+                    .brightness(0.2-positiveOnly(Double(heightOffset)/300))
+                    .sheet(isPresented: $showingSheet){
+                        LocationRequestView(showSheet: $showingSheet)
+                    }
+                    
+                    
+                    VStack{
+                        Spacer().frame(width: 100, height: 25, alignment: .center)//Spacer so the text isnt covered by the scrolling stuff
+                        ScrollView(showsIndicators: false){//scrollview being tracked
+                            Spacer().frame(width: 100, height: 90, alignment: .center)//keeps the scrollview from going on top of the moving text
+                            
+                            
+                            ScrollView(showsIndicators: false) {//scrollview with the actual info
+                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                VStack{//the actual info
+                                    Spacer().frame(width: 5)//Keeps the blocks off the side of the screen and looks 100x better
+                                    //goes through all the info
                                     
-                                }.readingScrollView(from: "scroll", into: $offset)//idk abt this
-                                Spacer().frame(width: 100, height: 100, alignment: .center)//makes space between views
-                                ScrollView(.horizontal, showsIndicators: false) {//same exactly as above, only change is its hourly
-                                    //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                    Button(action: {showingHours[0].toggle()}, label: {
                                     HStack{
-                                        Spacer().frame(width: 5)
-                                        ForEach(0..<allHourly.count){index in
-                                            NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
-                                                VStack{
-                                                    
-                                                    Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
-                                                    Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
-                                                    if !(allHourly[index].windSpeed.hasPrefix("0")){
-                                                        Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
-                                                    }
-                                                    else{
-                                                        Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
-                                                    }
-                                                    //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
-                                                }.background(Color.blue.opacity(0.5))
-                                                .cornerRadius(10)
-                                                .frame(alignment: .center)
-                                                //.opacity(0)
-                                            }
+                                        VStack{//one block containing text in the horizontal scrollview
                                             
-                                            Spacer()
+                                            Text(allDaily[0].name).foregroundColor(.white)
+                                            Text(" \(Image(systemName: "thermometer")) \(allDaily[0].temperature) \(allDaily[0].temperatureUnit) ").foregroundColor(.white)
+                                            Text(" \(Image(systemName: "wind")) \(allDaily[0].windSpeed) \(allDaily[0].windDirection) ").foregroundColor(.white)
+                                            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                        }.background(Color.blue.opacity(0.5))
+                                        .cornerRadius(10)
+                                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
+                                        Spacer()//keeps the blocks seperate
+                                        Group{
+                                            if (showingHours[0]){
+                                                Image("down")
+                                            
+                                            }else{
+                                                Image("up")
+                                            }
                                         }
+                                    }})
+                                    Group{
+                                        if (showingHours[0]){
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                //same exactly as above, only change is its hourly
+                                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                                HStack{
+                                                    Spacer().frame(width: 5)
+                                                    ForEach(0..<hoursLeft){index in
+                                                        NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
+                                                            VStack{
+                                                                
+                                                                Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                                                Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
+                                                                if !(allHourly[index].windSpeed.hasPrefix("0")){
+                                                                    Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
+                                                                }
+                                                                else{
+                                                                    Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
+                                                                }
+                                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                                            }.background(Color.blue.opacity(0.5))
+                                                            .cornerRadius(10)
+                                                            .frame(alignment: .center)
+                                                            //.opacity(0)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                    Spacer()
+                                    Button(action: {showingHours[1].toggle()}, label: {
+                                    HStack{
+                                        VStack{//one block containing text in the horizontal scrollview
+                                            
+                                            Text(allDaily[1].name).foregroundColor(.white)
+                                            Text(" \(Image(systemName: "thermometer")) \(allDaily[1].temperature) \(allDaily[1].temperatureUnit) ").foregroundColor(.white)
+                                            Text(" \(Image(systemName: "wind")) \(allDaily[1].windSpeed) \(allDaily[1].windDirection) ").foregroundColor(.white)
+                                            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                        }.background(Color.blue.opacity(0.5))
+                                        .cornerRadius(10)
+                                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
+                                        Spacer()//keeps the blocks seperate
+                                        Group{
+                                            if (showingHours[1]){
+                                                Image("down")
+                                            
+                                            }else{
+                                                Image("up")
+                                            }
+                                        }
+                                    }})
+                                    Spacer()
+                                    Group{
+                                        if (showingHours[1]){
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                //same exactly as above, only change is its hourly
+                                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                                HStack{
+                                                    Spacer().frame(width: 5)
+                                                    ForEach(hoursLeft..<(hoursLeft + 24)){index in
+                                                        NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
+                                                            VStack{
+                                                                
+                                                                Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                                                Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
+                                                                if !(allHourly[index].windSpeed.hasPrefix("0")){
+                                                                    Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
+                                                                }
+                                                                else{
+                                                                    Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
+                                                                }
+                                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                                            }.background(Color.blue.opacity(0.5))
+                                                            .cornerRadius(10)
+                                                            .frame(alignment: .center)
+                                                            //.opacity(0)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                    Button(action: {showingHours[2].toggle()}, label: {
+                                    HStack{
+                                        VStack{//one block containing text in the horizontal scrollview
+                                            
+                                            Text(allDaily[2].name).foregroundColor(.white)
+                                            Text(" \(Image(systemName: "thermometer")) \(allDaily[2].temperature) \(allDaily[2].temperatureUnit) ").foregroundColor(.white)
+                                            Text(" \(Image(systemName: "wind")) \(allDaily[2].windSpeed) \(allDaily[2].windDirection) ").foregroundColor(.white)
+                                            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                        }.background(Color.blue.opacity(0.5))
+                                        .cornerRadius(10)
+                                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
+                                        Spacer()//keeps the blocks seperate
+                                        Group{
+                                            if (showingHours[2]){
+                                                Image("down")
+                                            
+                                            }else{
+                                                Image("up")
+                                            }
+                                        }
+                                    }})
+                                    Group{
+                                        if (showingHours[2]){
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                //same exactly as above, only change is its hourly
+                                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                                HStack{
+                                                    Spacer().frame(width: 5)
+                                                    ForEach((hoursLeft + 24)..<(hoursLeft + 48)){index in
+                                                        NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
+                                                            VStack{
+                                                                
+                                                                Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                                                Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
+                                                                if !(allHourly[index].windSpeed.hasPrefix("0")){
+                                                                    Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
+                                                                }
+                                                                else{
+                                                                    Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
+                                                                }
+                                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                                            }.background(Color.blue.opacity(0.5))
+                                                            .cornerRadius(10)
+                                                            .frame(alignment: .center)
+                                                            //.opacity(0)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                    Spacer()
+                                    Button(action: {showingHours[3].toggle()}, label: {
+                                    HStack{
+                                        VStack{//one block containing text in the horizontal scrollview
+                                            
+                                            Text(allDaily[3].name).foregroundColor(.white)
+                                            Text(" \(Image(systemName: "thermometer")) \(allDaily[3].temperature) \(allDaily[3].temperatureUnit) ").foregroundColor(.white)
+                                            Text(" \(Image(systemName: "wind")) \(allDaily[3].windSpeed) \(allDaily[3].windDirection) ").foregroundColor(.white)
+                                            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                        }.background(Color.blue.opacity(0.5))
+                                        .cornerRadius(10)
+                                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
+                                        Spacer()//keeps the blocks seperate
+                                        Group{
+                                            if (showingHours[3]){
+                                                Image("down")
+                                            
+                                            }else{
+                                                Image("up")
+                                            }
+                                        }
+                                    }})
+                                    Spacer()
+                                    Group{
+                                        if (showingHours[3]){
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                //same exactly as above, only change is its hourly
+                                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                                HStack{
+                                                    Spacer().frame(width: 5)
+                                                    ForEach((hoursLeft + 48)..<(hoursLeft + 72)){index in
+                                                        NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
+                                                            VStack{
+                                                                
+                                                                Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                                                Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
+                                                                if !(allHourly[index].windSpeed.hasPrefix("0")){
+                                                                    Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
+                                                                }
+                                                                else{
+                                                                    Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
+                                                                }
+                                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                                            }.background(Color.blue.opacity(0.5))
+                                                            .cornerRadius(10)
+                                                            .frame(alignment: .center)
+                                                            //.opacity(0)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                    Button(action: {showingHours[4].toggle()}, label: {
+                                    HStack{
+                                        VStack{//one block containing text in the horizontal scrollview
+                                            
+                                            Text(allDaily[4].name).foregroundColor(.white)
+                                            Text(" \(Image(systemName: "thermometer")) \(allDaily[4].temperature) \(allDaily[4].temperatureUnit) ").foregroundColor(.white)
+                                            Text(" \(Image(systemName: "wind")) \(allDaily[4].windSpeed) \(allDaily[4].windDirection) ").foregroundColor(.white)
+                                            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                        }.background(Color.blue.opacity(0.5))
+                                        .cornerRadius(10)
+                                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
+                                        Spacer()//keeps the blocks seperate
+                                        Group{
+                                            if (showingHours[4]){
+                                                Image("down")
+                                            
+                                            }else{
+                                                Image("up")
+                                            }
+                                        }
+                                    }})
+                                    Spacer()
+                                    Group{
+                                        if (showingHours[4]){
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                //same exactly as above, only change is its hourly
+                                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                                HStack{
+                                                    Spacer().frame(width: 5)
+                                                    ForEach((hoursLeft + 72)..<(hoursLeft + 96)){index in
+                                                        NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
+                                                            VStack{
+                                                                
+                                                                Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                                                Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
+                                                                if !(allHourly[index].windSpeed.hasPrefix("0")){
+                                                                    Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
+                                                                }
+                                                                else{
+                                                                    Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
+                                                                }
+                                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                                            }.background(Color.blue.opacity(0.5))
+                                                            .cornerRadius(10)
+                                                            .frame(alignment: .center)
+                                                            //.opacity(0)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                    Spacer()
+                                    Button(action: {showingHours[5].toggle()}, label: {
+                                    HStack{
+                                        VStack{//one block containing text in the horizontal scrollview
+                                            
+                                            Text(allDaily[5].name).foregroundColor(.white)
+                                            Text(" \(Image(systemName: "thermometer")) \(allDaily[5].temperature) \(allDaily[5].temperatureUnit) ").foregroundColor(.white)
+                                            Text(" \(Image(systemName: "wind")) \(allDaily[5].windSpeed) \(allDaily[5].windDirection) ").foregroundColor(.white)
+                                            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                        }.background(Color.blue.opacity(0.5))
+                                        .cornerRadius(10)
+                                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
+                                        Spacer()//keeps the blocks seperate
+                                        Group{
+                                            if (showingHours[5]){
+                                                Image("down")
+                                            
+                                            }else{
+                                                Image("up")
+                                            }
+                                        }
+                                    }})
+                                    Spacer()
+                                    Group{
+                                        if (showingHours[5]){
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                //same exactly as above, only change is its hourly
+                                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                                HStack{
+                                                    Spacer().frame(width: 5)
+                                                    ForEach((hoursLeft + 96)..<(hoursLeft) + 120){index in
+                                                        NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
+                                                            VStack{
+                                                                
+                                                                Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                                                Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
+                                                                if !(allHourly[index].windSpeed.hasPrefix("0")){
+                                                                    Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
+                                                                }
+                                                                else{
+                                                                    Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
+                                                                }
+                                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                                            }.background(Color.blue.opacity(0.5))
+                                                            .cornerRadius(10)
+                                                            .frame(alignment: .center)
+                                                            //.opacity(0)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                    Spacer()
+                                    Button(action: {showingHours[6].toggle()}, label: {
+                                    HStack{
+                                        VStack{//one block containing text in the horizontal scrollview
+                                            
+                                            Text(allDaily[6].name).foregroundColor(.white)
+                                            Text(" \(Image(systemName: "thermometer")) \(allDaily[6].temperature) \(allDaily[6].temperatureUnit) ").foregroundColor(.white)
+                                            Text(" \(Image(systemName: "wind")) \(allDaily[6].windSpeed) \(allDaily[6].windDirection) ").foregroundColor(.white)
+                                            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                        }.background(Color.blue.opacity(0.5))
+                                        .cornerRadius(10)
+                                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)//makes it look nice
+                                        Spacer()//keeps the blocks seperate
+                                        Group{
+                                            if (showingHours[0]){
+                                                Image("down")
+                                            
+                                            }else{
+                                                Image("up")
+                                            }
+                                        }
+                                    }})
+                                    Spacer()
+                                    Group{
+                                        if (showingHours[6]){
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                //same exactly as above, only change is its hourly
+                                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                                                HStack{
+                                                    Spacer().frame(width: 5)
+                                                    ForEach((hoursLeft + 120)..<allHourly.count){index in
+                                                        NavigationLink(destination: AdvancedHourlyView(data: $g.hForecast.properties.periods[index])) {
+                                                            VStack{
+                                                                
+                                                                Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                                                Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
+                                                                if !(allHourly[index].windSpeed.hasPrefix("0")){
+                                                                    Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
+                                                                }
+                                                                else{
+                                                                    Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
+                                                                }
+                                                                //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                                            }.background(Color.blue.opacity(0.5))
+                                                            .cornerRadius(10)
+                                                            .frame(alignment: .center)
+                                                            //.opacity(0)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                        
                                     }
                                     
                                 }
-                                Spacer()
-                                    .frame(height: 2000)//for demonstration
-                                Text("You can't scroll any more sorry")
-                                    .foregroundColor(.white)//for the lols
-                            }
-                            .coordinateSpace(name: "scroll")//not sure about this either
-                        }
-                    
-                        VStack{//Contains the text that is being changed
-                            Spacer().frame(height: 5)
-                            ZStack{
-                                DIssapearingView(data: f.responses.current)
-                                    .opacity(1-(Double(heightOffset)/85))
-                                    .foregroundColor(.white)//slowly dissapears as user scrolls
-                                //Spacer()
-                                AppearingView(data: f.responses.current)
-                                    .opacity(0+(Double(heightOffset)/85))
-                                    .foregroundColor(.white)
-                            }
-                            
-                            
-                      //      if heightOffset < 87{//keeps on screen till it reaches the point that i want it to stop at
-                     //           Text("This text is moving")
-                     //               .position(x: 73+CGFloat(positiveOnly(Double(heightOffset))*(Double(coeffOfWidth)/87)), y:60-CGFloat(positiveOnly(Double(heightOffset)))).foregroundColor(.white)//moves with the scrolling
-                     //       }
-                     //       if heightOffset >= 87{//makes the text appear in place of the other at the point i want it
-                    //            Text("This text is moving").position(x: (screenWidth/2), y: -28).foregroundColor(.white)//puts the same text as above in the same spot
-                    //        }
-                            
-                            
-                           // Text("\(heightOffset)").foregroundColor(.white)//used for figuring out values for stuff
+                                
+                            }.readingScrollView(from: "scroll", into: $offset)//idk abt this
+                            Spacer().frame(width: 100, height: 100, alignment: .center)//makes space between views
                             Spacer()
+                                .frame(height: 2000)//for demonstration
+                            Text("You can't scroll any more sorry")
+                                .foregroundColor(.white)//for the lols
                         }
+                        .coordinateSpace(name: "scroll")//not sure about this either
                     }
-                   
+                    
+                    VStack{//Contains the text that is being changed
+                        Spacer().frame(height: 5)
+                        ZStack{
+                            DIssapearingView(data: f.responses.current)
+                                .opacity(1-(Double(heightOffset)/85))
+                                .foregroundColor(.white)//slowly dissapears as user scrolls
+                            //Spacer()
+                            AppearingView(data: f.responses.current)
+                                .opacity(0+(Double(heightOffset)/85))
+                                .foregroundColor(.white)
+                        }
+                        
+                        
+                        //      if heightOffset < 87{//keeps on screen till it reaches the point that i want it to stop at
+                        //           Text("This text is moving")
+                        //               .position(x: 73+CGFloat(positiveOnly(Double(heightOffset))*(Double(coeffOfWidth)/87)), y:60-CGFloat(positiveOnly(Double(heightOffset)))).foregroundColor(.white)//moves with the scrolling
+                        //       }
+                        //       if heightOffset >= 87{//makes the text appear in place of the other at the point i want it
+                        //            Text("This text is moving").position(x: (screenWidth/2), y: -28).foregroundColor(.white)//puts the same text as above in the same spot
+                        //        }
+                        
+                        
+                        // Text("\(heightOffset)").foregroundColor(.white)//used for figuring out values for stuff
+                        Spacer()
+                    }
+                }
+                
                 //.edgesIgnoringSafeArea(.all)//fills out the screen
                 
             }
@@ -258,4 +614,12 @@ func timeToInt(_ rawTime : String) -> Int {
     let tTime3 : String = String(tTime2.dropLast())
     let time = Int(tTime3) ?? 0
     return time
+}
+
+//figuring out how many hours to display for today
+func getHowManyHoursAreLeftInToday() -> Int{
+    let date = Date()
+    var calendar = Calendar.current
+    let hour = calendar.component(.hour, from: date)
+    return 24-hour
 }
