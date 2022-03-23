@@ -127,5 +127,15 @@ func getHowManyHoursAreLeftInToday() -> Int{
     let date = Date()
     var calendar = Calendar.current
     let hour = calendar.component(.hour, from: date)
-    return 24-hour
+    return 25-hour
+}
+
+
+func nightOrDay(dp: DPeriods) -> Int{
+    if (dp.name.contains("Night")){
+        return 1
+    }
+    
+    
+    return 2
 }

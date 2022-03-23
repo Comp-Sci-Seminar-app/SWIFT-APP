@@ -35,11 +35,20 @@ struct ContentView: View {
         let allDaily = g.dForecast.properties.periods//all of the important info passed by the API for daily
         let allHourly = g.hForecast.properties.periods//all of the important info passed by the API for hourly
         let heightOffset = 90+offset.y//the normal offset is 90 off because of how spacers work in scrollviews, this makes it easier to use the value
+        let dayOffset: Int = nightOrDay(dp: allDaily[2])
         NavigationView{
             Group{
                 // if locationManager.userLocation == nil{
                 //      LocationRequestView()
                 //  }
+                /*
+                Group{
+                    if (allDaily[1].name.contains("Night")){
+                        dayOffset = 2
+                    }else{
+                        dayOffset = 1
+                    }
+                }*/
                 
                 ZStack {
                     //so i can put a rectangle as the background and stuff like that
@@ -53,14 +62,14 @@ struct ContentView: View {
                             
                             ForEach(1..<7){index in//goes through all the info
                                 
-                                NavigationLink(destination: DailyView(dayInfo : allDaily[(index * 2) - 1] , hInfo : allHourly ), label: {
+                                NavigationLink(destination: DailyView(dayInfo : allDaily[(index * 2) - dayOffset] , hInfo : allHourly , index: index ), label: {
                                     VStack{//one block containing text in the horizontal scrollview
                                         
-                                        Text(allDaily[index].name).foregroundColor(.white)
-                                        Text(" \(Image(systemName: "thermometer")) \(allDaily[index].temperature) \(allDaily[index].temperatureUnit) ").foregroundColor(.white)
-                                        Text(" \(Image(systemName: "wind")) \(allDaily[index].windSpeed) \(allDaily[index].windDirection) ").foregroundColor(.white)
+                                        Text(allDaily[(index * 2) - dayOffset].name).foregroundColor(.white)
+                                        Text(" \(Image(systemName: "thermometer")) \(allDaily[(index * 2) - dayOffset].temperature) \(allDaily[(index * 2) - dayOffset].temperatureUnit) ").foregroundColor(.white)
+                                        Text(" \(Image(systemName: "wind")) \(allDaily[(index * 2) - dayOffset].windSpeed) \(allDaily[(index * 2) - dayOffset].windDirection) ").foregroundColor(.white)
                                         //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
-                                    }.background(Color.blue.opacity(0.5))
+                                    }.frame(width: UIScreen.main.bounds.width - 10, height: 200).background(Color.blue.opacity(0.5))
                                     .cornerRadius(10)
                                     .frame(alignment: .center)
                                     
@@ -72,15 +81,14 @@ struct ContentView: View {
                                 Spacer()//keeps the blocks seperate
                             }
                             //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
-
+                            
                             
                             
                             
                             
                         }
                         //.readingScrollView(from: "scroll", into: $offset)//idk abt this
-                        Spacer().frame(width: 100, height: 100, alignment: .center)//makes space between views
-                        Spacer().frame(width: 100, height: 100, alignment: .center)//makes space between views
+                        //makes space between views
                     }
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                     .background(
@@ -101,61 +109,60 @@ struct ContentView: View {
                         
                     )
                     .edgesIgnoringSafeArea(.all)
-                    .brightness(0.2-positiveOnly(Double(heightOffset)/300))
                     .sheet(isPresented: $showingSheet){
                         LocationRequestView(showSheet: $showingSheet)
                     }
                     
-                    
-                    VStack{
-                        Spacer().frame(width: 100, height: 25, alignment: .center)//Spacer so the text isnt covered by the scrolling stuff
-                        ScrollView(showsIndicators: false){//scrollview being tracked
-                            Spacer().frame(width: 100, height: 90, alignment: .center)//keeps the scrollview from going on top of the moving text
-                            
-                            
-                            ScrollView(showsIndicators: false) {//scrollview with the actual info
-                                //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
-                                VStack{//the actual info
-                                    Spacer().frame(width: 5)//Keeps the blocks off the side of the screen and looks 100x better
-                                    //goes through all the info
-                                    
-                                }
-                                
-                            }.readingScrollView(from: "scroll", into: $offset)//idk abt this
-                            Spacer().frame(width: 100, height: 100, alignment: .center)//makes space between views
-                            Spacer()
-                                .frame(height: 2000)//for demonstration
-                            Text("You can't scroll any more sorry")
-                                .foregroundColor(.white)//for the lols
-                        }
-                        .coordinateSpace(name: "scroll")//not sure about this either
-                    }
-                    
-                    VStack{//Contains the text that is being changed
-                        Spacer().frame(height: 5)
-                        ZStack{
-                            DIssapearingView(data: f.responses.current)
-                                .opacity(1-(Double(heightOffset)/85))
-                                .foregroundColor(.white)//slowly dissapears as user scrolls
-                            //Spacer()
-                            AppearingView(data: f.responses.current)
-                                .opacity(0+(Double(heightOffset)/85))
-                                .foregroundColor(.white)
-                        }
-                        
-                        
-                        //      if heightOffset < 87{//keeps on screen till it reaches the point that i want it to stop at
-                        //           Text("This text is moving")
-                        //               .position(x: 73+CGFloat(positiveOnly(Double(heightOffset))*(Double(coeffOfWidth)/87)), y:60-CGFloat(positiveOnly(Double(heightOffset)))).foregroundColor(.white)//moves with the scrolling
-                        //       }
-                        //       if heightOffset >= 87{//makes the text appear in place of the other at the point i want it
-                        //            Text("This text is moving").position(x: (screenWidth/2), y: -28).foregroundColor(.white)//puts the same text as above in the same spot
-                        //        }
-                        
-                        
-                        // Text("\(heightOffset)").foregroundColor(.white)//used for figuring out values for stuff
-                        Spacer()
-                    }
+                    /*
+                     VStack{
+                     Spacer().frame(width: 100, height: 25, alignment: .center)//Spacer so the text isnt covered by the scrolling stuff
+                     ScrollView(showsIndicators: false){//scrollview being tracked
+                     Spacer().frame(width: 100, height: 90, alignment: .center)//keeps the scrollview from going on top of the moving text
+                     
+                     
+                     ScrollView(showsIndicators: false) {//scrollview with the actual info
+                     //Spacer().frame(width: 100, height: heightOffset, alignment: .center)
+                     VStack{//the actual info
+                     Spacer().frame(width: 5)//Keeps the blocks off the side of the screen and looks 100x better
+                     //goes through all the info
+                     
+                     }
+                     
+                     }.readingScrollView(from: "scroll", into: $offset)//idk abt this
+                     Spacer().frame(width: 100, height: 100, alignment: .center)//makes space between views
+                     Spacer()
+                     .frame(height: 2000)//for demonstration
+                     Text("You can't scroll any more sorry")
+                     .foregroundColor(.white)//for the lols
+                     }
+                     .coordinateSpace(name: "scroll")//not sure about this either
+                     }
+                     
+                     VStack{//Contains the text that is being changed
+                     Spacer().frame(height: 5)
+                     ZStack{
+                     DIssapearingView(data: f.responses.current)
+                     .opacity(1-(Double(heightOffset)/85))
+                     .foregroundColor(.white)//slowly dissapears as user scrolls
+                     //Spacer()
+                     AppearingView(data: f.responses.current)
+                     .opacity(0+(Double(heightOffset)/85))
+                     .foregroundColor(.white)
+                     }
+                     
+                     
+                     //      if heightOffset < 87{//keeps on screen till it reaches the point that i want it to stop at
+                     //           Text("This text is moving")
+                     //               .position(x: 73+CGFloat(positiveOnly(Double(heightOffset))*(Double(coeffOfWidth)/87)), y:60-CGFloat(positiveOnly(Double(heightOffset)))).foregroundColor(.white)//moves with the scrolling
+                     //       }
+                     //       if heightOffset >= 87{//makes the text appear in place of the other at the point i want it
+                     //            Text("This text is moving").position(x: (screenWidth/2), y: -28).foregroundColor(.white)//puts the same text as above in the same spot
+                     //        }
+                     
+                     
+                     // Text("\(heightOffset)").foregroundColor(.white)//used for figuring out values for stuff
+                     Spacer()
+                     }*/
                 }
                 
                 //.edgesIgnoringSafeArea(.all)//fills out the screen
