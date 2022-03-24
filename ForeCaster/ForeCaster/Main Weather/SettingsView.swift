@@ -8,66 +8,56 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State var reminderEnabled: Bool = true
-    @State var selectedTrigger = ReminderType.time
-    @State var timeDurationIndex: Int = 0
-    @State private var shouldRepeat = true
-    @Environment(\.presentationMode) var presentationMode
-    @StateObject var locationManager = LocationManager()
+    var t: [Notification] = [Notification(weather: "Sun", time: 120.0), Notification(weather: "Rain", time: 60.0)]
     
-    let timeDurations: [Int] = Array(1...60)
-    func makeReminderTime(time: Int) -> Reminder? {
-        guard reminderEnabled else {
-            return nil
+    
+    //Only goes in hours
+    func timeInSeconds(p : String) -> Double {
+        var multiplier: Double = 1.0
+        if p == "8:00 AM"{
+            multiplier = 1.0
         }
-        timeDurationIndex = time
-        var reminder = Reminder()
-        reminder.reminderType = selectedTrigger
-        reminder.timeInterval = TimeInterval(timeDurations[timeDurationIndex] * 60)
-        reminder.repeats = true
-        return reminder
+        return 3600.0 * multiplier
     }
     
-    @State var selectedTriggerCalendar = ReminderType.calendar
-    @State private var dateTrigger = Date()
-    @State private var latitude: String = ""
-    @State private var longitude: String = ""
-    @State private var radius: String = ""
-    
-    
-    func makeReminderCalendar() -> Reminder? {
-        guard reminderEnabled else {
-            return nil
-        }
-        var reminder = Reminder()
-        reminder.reminderType = selectedTrigger
-        reminder.date = dateTrigger
-        reminder.repeats = false
-        return reminder
-    }
-    
-    
-    
-    var body: some View{
-        VStack{
-            Toggle(isOn: $reminderEnabled) {
-                Text("Add Reminder")
+    var body: some View {
+        VStack {
+            Button("Request Permission") {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                    if success {
+                        print("All set!")
+                    } else if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }
             }
-            .padding(.vertical)
- 
-            Button("Create 1 minute notification") {
-                TaskManager.shared.addNewTask("1 minute notification", makeReminderTime(time: 0))
-                presentationMode.wrappedValue.dismiss()
+
+            Button("Schedule Notification") {
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                
+                for i in t{
+                    let content = UNMutableNotificationContent()
+                    content.title = "Weather Notification"
+                   
+                    if i.weather == "Rain" {
+                        content.subtitle = "Rain"
+                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: i.time, repeats: false)
+                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request)
+                    }
+                    else{
+                        content.subtitle = "Bright and Sunny"
+                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: i.time, repeats: false)
+                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request)
+                    }
+                }
+                //content.sound = UNNotificationSound.default
             }
-            
-            Button("Create 2 minute notification") {
-                TaskManager.shared.addNewTask("2 minute notification", makeReminderTime(time: 1))
-                presentationMode.wrappedValue.dismiss()
-            }
-            
-            Button("Test Date Based") {
-                TaskManager.shared.addNewTask("n", makeReminderCalendar())
-                presentationMode.wrappedValue.dismiss()
+            Button("Remove Notifications") {
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             }
         }
     }

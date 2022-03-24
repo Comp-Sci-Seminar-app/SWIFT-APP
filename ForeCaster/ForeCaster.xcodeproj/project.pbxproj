@@ -14,6 +14,7 @@
 		1AE48D8C27C7D0A20077E87A /* ForeCasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D8B27C7D0A20077E87A /* ForeCasterTests.swift */; };
 		1AE48D9727C7D0A20077E87A /* ForeCasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */; };
 		418DE420F7143A7BC95E52BD /* libPods-ForeCaster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */; };
+		6B3B31FB27ECA16300A2A9FD /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3B31FA27ECA16300A2A9FD /* Notifications.swift */; };
 		6B54727127D24692003B778B /* AdvancedHourlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B54727027D24692003B778B /* AdvancedHourlyView.swift */; };
 		6B54727327D2472B003B778B /* backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B54727227D2472B003B778B /* backend.swift */; };
 		6BE7032F27C7D25E00CC8CBF /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7032E27C7D25E00CC8CBF /* dataParsing.swift */; };
@@ -61,6 +62,7 @@
 		1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCasterUITests.swift; sourceTree = "<group>"; };
 		1AE48D9827C7D0A20077E87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForeCaster.release.xcconfig"; path = "Target Support Files/Pods-ForeCaster/Pods-ForeCaster.release.xcconfig"; sourceTree = "<group>"; };
+		6B3B31FA27ECA16300A2A9FD /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		6B54727027D24692003B778B /* AdvancedHourlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedHourlyView.swift; sourceTree = "<group>"; };
 		6B54727227D2472B003B778B /* backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backend.swift; sourceTree = "<group>"; };
 		6BE7032E27C7D25E00CC8CBF /* dataParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataParsing.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				6B54727027D24692003B778B /* AdvancedHourlyView.swift */,
 				6B54727227D2472B003B778B /* backend.swift */,
 				6BE7034927C7D6E000CC8CBF /* SettingsView.swift */,
+				6B3B31FA27ECA16300A2A9FD /* Notifications.swift */,
 			);
 			path = "Main Weather";
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
 				6BE7032F27C7D25E00CC8CBF /* dataParsing.swift in Sources */,
 				6BE7033C27C7D2B200CC8CBF /* Task.swift in Sources */,
+				6B3B31FB27ECA16300A2A9FD /* Notifications.swift in Sources */,
 				1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */,
 				6BE7034027C7D2B200CC8CBF /* TaskPersistenceManager.swift in Sources */,
 				6BE7033D27C7D2B200CC8CBF /* TaskListView.swift in Sources */,
