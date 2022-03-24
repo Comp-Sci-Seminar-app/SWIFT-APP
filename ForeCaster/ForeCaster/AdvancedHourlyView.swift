@@ -9,7 +9,7 @@ import SwiftUI
 import struct Kingfisher.KFImage
 
 struct AdvancedHourlyView: View {
-    @Binding var data : HPeriods
+    var data : HPeriods
     
     var body: some View {
         
@@ -84,8 +84,9 @@ struct AdvancedHourlyView: View {
                     Spacer()
                 }.frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - 60)
                 VStack{
+                    Spacer().frame(height: 27.5)
                     HStack{
-                        Image("back").resizable().frame(width: 50, height: 50)
+                        Rectangle().frame(width: 80, height: 30).opacity(0.6).cornerRadius(20)
                         Spacer()
                     }
                     Spacer()

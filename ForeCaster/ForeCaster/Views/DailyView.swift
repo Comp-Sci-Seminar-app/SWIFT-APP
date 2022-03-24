@@ -13,35 +13,35 @@ struct DailyView: View {
     var index : Int
     var body: some View {
         var hLeft = getHowManyHoursAreLeftInToday()
-        NavigationView{
+        ZStack{
             VStack{
-                Spacer()
-                Text("\(dayInfo.detailedForecast)")
+                Spacer().frame(height: 60)
+                Text("\(dayInfo.detailedForecast)").background(Color.gray.opacity(0.6)).cornerRadius(7).frame(width: UIScreen.main.bounds.width - 60)
                 Spacer()
                 
-                ScrollView(.horizontal){
-                    HStack{
-                        Spacer()
+                ScrollView(){
+                    VStack{
+                        Spacer().frame(height: 10)
                         VStack{
                             Text("Wind Speed:")
                             Text("\(dayInfo.windSpeed) mph")
-                        }.frame(width: 200, height: 100).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
+                        }.frame(width: UIScreen.main.bounds.width - 50, height: 80).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                         
-                        Spacer()
+                        Spacer().frame(height: 10)
                         VStack{
                             Text("Temperature:")
                             Text("\(dayInfo.temperature) mph")
-                        }.frame(width: 200, height: 100).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
+                        }.frame(width: UIScreen.main.bounds.width - 50, height: 80).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                         
-                        Spacer()
+                        Spacer().frame(height: 10)
                         VStack{
                             Text("Wind Direction:")
                             Text("\(dayInfo.windSpeed) mph")
-                        }.frame(width: 200, height: 100).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
+                        }.frame(width: UIScreen.main.bounds.width - 50, height: 80).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                         
-                        Spacer()
-                    }
-                }
+                        Spacer().frame(height: 10)
+                    }.font(.system(size: 25))
+                }.frame(height: 280)
                 
                 Spacer()
                 ScrollView(.horizontal){
@@ -50,7 +50,9 @@ struct DailyView: View {
                             
                             HStack{
                                 ForEach(0..<getHowManyHoursAreLeftInToday()){i in
-                                    hourlyPreView(i:i, hInfo: hInfo)
+                                    
+                                    NavigationLink(destination: AdvancedHourlyView(data: hInfo[i]), label: {hourlyPreView(i:i, hInfo: hInfo)})
+                                    //hourlyPreView(i:i, hInfo: hInfo)
                                     //.opacity(0)
                                     Spacer()
                                 }
@@ -61,7 +63,7 @@ struct DailyView: View {
                         else if index == 6{
                             HStack{
                                 ForEach((getHowManyHoursAreLeftInToday() + 120)..<hInfo.count){i in
-                                    hourlyPreView(i:i, hInfo: hInfo)
+                                    NavigationLink(destination: AdvancedHourlyView(data: hInfo[i]), label: {hourlyPreView(i:i, hInfo: hInfo)})
                                     //.opacity(0)
                                     Spacer()
                                 }
@@ -69,10 +71,10 @@ struct DailyView: View {
                         }
                         else{
                             let start = hLeft + (24 * (index - 1))
-                            let finish = (hLeft + (24 * index)) 
+                            let finish = (hLeft + (24 * index))
                             HStack{
                                 ForEach(start..<finish){i in
-                                    hourlyPreView(i:i, hInfo: hInfo)
+                                    NavigationLink(destination: AdvancedHourlyView(data: hInfo[i]), label: {hourlyPreView(i:i, hInfo: hInfo)})
                                     //.opacity(0)
                                     Spacer()
                                 }
@@ -82,9 +84,27 @@ struct DailyView: View {
                     
                     
                 }
-                Spacer()
+                Spacer().frame(height: 100)
+
                 
             }
+            VStack{
+                Spacer().frame(height: 27.5)
+                HStack{
+                    Rectangle().frame(width: 80, height: 30).opacity(0.6).cornerRadius(20)
+                    Spacer()
+                }
+                Spacer()
+            }
         }
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).ignoresSafeArea(.all)
+        .background(Image("background")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                        .ignoresSafeArea(.all)
+                        
+        )
+        
+        
     }
 }

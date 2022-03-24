@@ -11,6 +11,7 @@ import CoreLocation
 
 
 //allows me to set the back button to invisible so I can add a custom image behind it. Also copy and pasted from stack overflow
+/*
 class Theme {
     static func navigationBarColors(background : UIColor?,
                                     titleColor : UIColor? = nil, tintColor : UIColor? = nil ){
@@ -28,7 +29,7 @@ class Theme {
         
         UINavigationBar.appearance().tintColor = tintColor ?? titleColor ?? .black
     }
-}
+}*/
 extension Color{
     static let customBlue = Color("CustomBlue")
     static let customGray = Color("CustomGray")
@@ -139,3 +140,5 @@ func nightOrDay(dp: DPeriods) -> Int{
     
     return 2
 }
+
+
