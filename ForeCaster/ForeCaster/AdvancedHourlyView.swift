@@ -86,7 +86,7 @@ struct AdvancedHourlyView: View {
                 VStack{
                     Spacer().frame(height: 27.5)
                     HStack{
-                        Rectangle().frame(width: 80, height: 30).opacity(0.6).cornerRadius(20)
+                        Rectangle().frame(width: 80, height: 30).opacity(0.8).cornerRadius(20)
                         Spacer()
                     }
                     Spacer()

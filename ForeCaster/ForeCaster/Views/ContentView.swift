@@ -25,7 +25,7 @@ struct ContentView: View {
     
     let hoursLeft = getHowManyHoursAreLeftInToday()
     init(){
-       // Theme.navigationBarColors(background: .clear, titleColor: .clear)
+        // Theme.navigationBarColors(background: .clear, titleColor: .clear)
     }
     var body: some View {
         let screenWidth = UIScreen.main.bounds.width
@@ -40,12 +40,20 @@ struct ContentView: View {
         NavigationView{
             
             Group{
-              
+                
                 ZStack {
                     //so i can put a rectangle as the background and stuff like that
                     //for the background
                     VStack{
-                        
+                        Spacer().frame(height: 40)
+                        HStack{
+                            VStack{
+                                Text("Current temperature: \(f.responses.current.temp_f)")
+                                Text("Current Weather: \(f.responses.current.condition?.text ?? "no data yet")")
+                            }.font(.system(size: 20))
+                            Image("wireframe").resizable().frame(width: 50, height: 50)
+                        }.frame(width: UIScreen.main.bounds.width - 10, height: 70).background(Color.blue.opacity(0.6)).cornerRadius(20)
+                        Spacer()
                         ScrollView(showsIndicators: false) {
                             //scrollview with the actual info
                             //the actual info
@@ -65,20 +73,20 @@ struct ContentView: View {
                                     .frame(alignment: .center).font(.system(size: 30))
                                     
                                     
-                                })
+                                }).navigationBarTitle("Back").navigationBarHidden(true)
                                 //makes it look nice
                                 
                                 
                                 Spacer()//keeps the blocks seperate
                             }
-                           
                             
                             
                             
                             
                             
-                        }
-                      
+                            
+                        }.ignoresSafeArea(.all)
+                        
                     }
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                     .background(
@@ -98,7 +106,6 @@ struct ContentView: View {
                         }
                         
                     )
-                    .edgesIgnoringSafeArea(.all)
                     .sheet(isPresented: $showingSheet){
                         LocationRequestView(showSheet: $showingSheet)
                     }
@@ -106,13 +113,11 @@ struct ContentView: View {
                     
                 }
                 
-              
+                
                 
             }
-        }.navigationBarTitle(Text(""))
-        .navigationBarHidden(true)
-
-
+        }.navigationBarTitle("").navigationBarHidden(true)
+        
         
     }
 }
