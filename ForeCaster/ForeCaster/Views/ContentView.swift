@@ -24,9 +24,6 @@ struct ContentView: View {
     
     
     let hoursLeft = getHowManyHoursAreLeftInToday()
-    init(){
-        // Theme.navigationBarColors(background: .clear, titleColor: .clear)
-    }
     var body: some View {
         let screenWidth = UIScreen.main.bounds.width
         //let screenHeight = UIScreen.main.bounds.height
@@ -73,7 +70,10 @@ struct ContentView: View {
                                     .frame(alignment: .center).font(.system(size: 30))
                                     
                                     
-                                }).navigationBarTitle("Back").navigationBarHidden(true)
+                                })
+                                //.navigationBarItems(leading: backButton())
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
                                 //makes it look nice
                                 
                                 

@@ -11,11 +11,24 @@ struct DailyView: View {
     var dayInfo : DPeriods
     var hInfo : [HPeriods]
     var index : Int
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View { Button(action: {
+        self.presentationMode.wrappedValue.dismiss()
+    }) {
+        ZStack{
+            Rectangle().frame(width: 80, height: 30).foregroundColor(Color.white.opacity(0.7)).cornerRadius(15)
+        HStack{
+            Image(systemName: "chevron.backward")
+            Text("Back")
+        }.foregroundColor(.red)
+        }
+    }
+    }
     var body: some View {
         var hLeft = getHowManyHoursAreLeftInToday()
         ZStack{
             VStack{
-                Spacer().frame(height: 60)
+                Spacer().frame(height: 100)
                 Text("\(dayInfo.detailedForecast)").background(Color.gray.opacity(0.6)).cornerRadius(7).frame(width: UIScreen.main.bounds.width - 60)
                 Spacer()
                 
@@ -88,22 +101,17 @@ struct DailyView: View {
 
                 
             }
-            VStack{
-                Spacer().frame(height: 27.5)
-                HStack{
-                    Rectangle().frame(width: 80, height: 30).opacity(0.8).cornerRadius(20)
-                    Spacer()
-                }
-                Spacer()
-            }
+           
         }
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).ignoresSafeArea(.all)
         .background(Image("background")
-                        .resizable()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                       // .resizable()
+                       // .frame(height: UIScreen.main.bounds.height)
                         .ignoresSafeArea(.all)
                         
         )
+        .navigationBarItems(leading: btnBack)
+        .navigationBarBackButtonHidden(true)
         
         
     }

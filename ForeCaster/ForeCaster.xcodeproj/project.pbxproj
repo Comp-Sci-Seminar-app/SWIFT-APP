@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A32257F27EB47A900A5C513 /* hourlyPreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A32257E27EB47A900A5C513 /* hourlyPreView.swift */; };
+		1A32B23627F33424004971FA /* backButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A32B23527F33424004971FA /* backButton.swift */; };
 		1A4FBA5427E8BD1B006F3E2A /* DailyPreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4FBA5327E8BD1B006F3E2A /* DailyPreView.swift */; };
 		1A4FBA5627E8C2CD006F3E2A /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4FBA5527E8C2CD006F3E2A /* testView.swift */; };
 		1A572AFF27D7A2D300004FD8 /* AdvancedHourlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A572AFE27D7A2D300004FD8 /* AdvancedHourlyView.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		1A32257E27EB47A900A5C513 /* hourlyPreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hourlyPreView.swift; sourceTree = "<group>"; };
+		1A32B23527F33424004971FA /* backButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backButton.swift; sourceTree = "<group>"; };
 		1A4FBA5327E8BD1B006F3E2A /* DailyPreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPreView.swift; sourceTree = "<group>"; };
 		1A4FBA5527E8C2CD006F3E2A /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		1A572AFE27D7A2D300004FD8 /* AdvancedHourlyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvancedHourlyView.swift; path = ForeCaster/AdvancedHourlyView.swift; sourceTree = SOURCE_ROOT; };
@@ -191,6 +193,7 @@
 				1A4FBA5327E8BD1B006F3E2A /* DailyPreView.swift */,
 				1A4FBA5527E8C2CD006F3E2A /* testView.swift */,
 				1A32257E27EB47A900A5C513 /* hourlyPreView.swift */,
+				1A32B23527F33424004971FA /* backButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			files = (
 				1A6BA14227E4B9610024F822 /* DailyView.swift in Sources */,
 				1A32257F27EB47A900A5C513 /* hourlyPreView.swift in Sources */,
+				1A32B23627F33424004971FA /* backButton.swift in Sources */,
 				F029D9B627D64C9400F2AB6E /* LocationManager.swift in Sources */,
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
 				F029D9BA27D7856000F2AB6E /* NewLocationView.swift in Sources */,

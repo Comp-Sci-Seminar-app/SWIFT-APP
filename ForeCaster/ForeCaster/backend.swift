@@ -29,6 +29,7 @@ class Theme {
         
         UINavigationBar.appearance().tintColor = tintColor ?? titleColor ?? .black
     }
+   
 }
 extension Color{
     static let customBlue = Color("CustomBlue")

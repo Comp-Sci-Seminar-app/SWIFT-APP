@@ -10,12 +10,24 @@ import struct Kingfisher.KFImage
 
 struct AdvancedHourlyView: View {
     var data : HPeriods
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View { Button(action: {
+        self.presentationMode.wrappedValue.dismiss()
+    }) {
+        ZStack{
+            Rectangle().frame(width: 80, height: 30).foregroundColor(Color.white.opacity(0.7)).cornerRadius(15)
+        HStack{
+            Image(systemName: "chevron.backward")
+            Text("Back")
+        }.foregroundColor(.red)
+        }
+    }
+    }
     var body: some View {
         
-   
+        
+        ZStack{
             ZStack{
-                ZStack{
                 VStack{
                     Spacer()
                     HStack{
@@ -25,7 +37,7 @@ struct AdvancedHourlyView: View {
                     Spacer()
                     VStack{
                         Spacer()
-
+                        
                         HStack{
                             Text("Short Forcast: \(data.shortForecast ?? "no data bro")")
                         }.frame(width: UIScreen.main.bounds.width - 80, height: 95).background(Color.customGray.opacity(0.6)).cornerRadius(15)
@@ -83,23 +95,25 @@ struct AdvancedHourlyView: View {
                     Spacer()
                     Spacer()
                 }.frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - 60)
-                VStack{
-                    Spacer().frame(height: 27.5)
-                    HStack{
-                        Rectangle().frame(width: 80, height: 30).opacity(0.8).cornerRadius(20)
-                        Spacer()
-                    }
-                    Spacer()
-                }
-                }
-            }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).ignoresSafeArea(.all)
-            .background(Image("background")
-                            .resizable()
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                            .ignoresSafeArea(.all)
-            )
-            
-      
+                // VStack{
+                //    Spacer().frame(height: 27.5)
+                //    HStack{
+                //         Rectangle().frame(width: 80, height: 30).opacity(0.8).cornerRadius(20)
+                //         Spacer()
+                //      }
+                //      Spacer()
+                //  }
+            }
+        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).ignoresSafeArea(.all)
+        .background(Image("background")
+                        // .resizable()
+                        // .frame(height: UIScreen.main.bounds.height)
+                        .ignoresSafeArea(.all)
+        )
+        .navigationBarItems(leading: btnBack)
+        .navigationBarBackButtonHidden(true)
+        
+        
     }
 }
 
