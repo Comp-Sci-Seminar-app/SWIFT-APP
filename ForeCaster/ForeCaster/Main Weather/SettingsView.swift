@@ -31,29 +31,14 @@ struct SettingsView: View {
                     }
                 }
             }
-
+            
             Button("Schedule Notification") {
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 
                 for i in t{
-                    let content = UNMutableNotificationContent()
-                    content.title = "Weather Notification"
-                   
-                    if i.weather == "Rain" {
-                        content.subtitle = "Rain"
-                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: i.time, repeats: false)
-                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                        UNUserNotificationCenter.current().add(request)
-                    }
-                    else{
-                        content.subtitle = "Bright and Sunny"
-                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: i.time, repeats: false)
-                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                        UNUserNotificationCenter.current().add(request)
-                    }
+                    i.setNotification(t: i)
                 }
-                //content.sound = UNNotificationSound.default
             }
             Button("Remove Notifications") {
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -62,3 +47,4 @@ struct SettingsView: View {
         }
     }
 }
+
