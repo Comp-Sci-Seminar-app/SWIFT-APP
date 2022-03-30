@@ -64,6 +64,29 @@ func makeTimeNice(_ evilTime: String)-> String{//Changes the time from what it l
         return niceTime//returns the shortened time in the default 24 hour clock format
     }
 }
+func makeTimeNice(_ evilTime: String, twentyFour: Bool)-> String{//Changes the time from what it looks like in the API(below) to normal format
+    //2022-02-24T10:00:00-05:00(example)
+    var twentyFourHourClock : Bool = twentyFour
+    let start = evilTime.dropFirst(11)//Removes the first 11 chars: 10:00:00-05:00
+    let end = start.dropLast(9)//Removes the last 9 chars: 10:00
+    var niceTime = String(end)//converts substring to string
+    if niceTime.first == "0"{//checks if first char is a 0, for example 4:00 AM would be 2022-02-24T04:00:00-05:00 in the API and at this point would be 04:00
+        niceTime = String(niceTime.dropFirst())//removes the 0: 4:00
+    }
+    else if !twentyFourHourClock{//Checks type of time for user
+        for i in 13...24{//iterates through 13 and 24
+            if niceTime.hasPrefix(String(i)){//checks if first two chars of time are greater than 12, the API uses a 24 hour clock
+                return String(i-12)+String(niceTime.dropFirst(2))+" PM"//removes the first two chars, replaces them with their 12 hour clock version, and returns the value
+            }
+        }
+    }
+    if !twentyFourHourClock{
+        return niceTime+" AM"//adds AM to end of hours no over 12 in API if user selects 12 hour clock
+    }
+    else{
+        return niceTime//returns the shortened time in the default 24 hour clock format
+    }
+}
 
 func positiveOnly(_ num : Double)->Double{//Takes a double and returns it if possitive, or zero if negative. Used so the screen doesn't go white if you scroll up
     if num > 0 {
@@ -143,3 +166,27 @@ func nightOrDay(dp: DPeriods) -> Int{
 }
 
 
+//Returns a list of hours that should have rain hopefully during them, thanks big gov for hiding your secret shortforcast list
+//Real spooky of you gov't
+//probably busy telling us birds aren't real
+func returnHourList(hp: [HPeriods]) -> [Int]{
+    var listOfH : [Int] = []
+    let offset = getHourOffset(hp[0])
+    for hour in hp{
+        if((hour.shortForecast?.contains("rain")) != nil){
+            listOfH.append(hour.number - offset)
+        }
+    }
+    return listOfH
+}
+
+//Gets how much of an offset there is from the current hour
+func getHourOffset(_ firstHour: HPeriods) -> Int{
+    let date = Date()
+    var calendar = Calendar.current
+    let hour = calendar.component(.hour, from: date)
+    var sTime = makeTimeNice(firstHour.startTime, twentyFour: true)
+    sTime.remove(at: sTime.firstIndex(of: ":")!)
+    let timeInt = Int(sTime)
+    return (hour - (timeInt ?? 0))
+}
