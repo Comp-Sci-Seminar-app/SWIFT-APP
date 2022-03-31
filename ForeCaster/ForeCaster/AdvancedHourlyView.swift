@@ -10,6 +10,8 @@ import struct Kingfisher.KFImage
 
 struct AdvancedHourlyView: View {
     var data : HPeriods
+    
+    //code for custom back button
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View { Button(action: {
         self.presentationMode.wrappedValue.dismiss()
@@ -25,7 +27,7 @@ struct AdvancedHourlyView: View {
     }
     var body: some View {
         
-        
+        //idk what to say here man, its a view. It shows data in a cooler way than the other weather app
         ZStack{
             ZStack{
                 VStack{

@@ -4,6 +4,8 @@
 //
 //  Created by Ari Steinfeld (student LM) on 3/29/22.
 //
+//  Gonna be honest, this file is completely uneccesary. 
+//
 
 import SwiftUI
 

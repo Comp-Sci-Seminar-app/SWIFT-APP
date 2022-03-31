@@ -4,6 +4,8 @@
 //
 //  Created by Ari Steinfeld (student LM) on 3/21/22.
 //
+//  This view is for when something bigger in contentview isn't working, and I want to test it in another branch.
+//
 
 import SwiftUI
 

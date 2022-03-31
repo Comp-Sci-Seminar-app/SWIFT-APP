@@ -45,7 +45,7 @@ struct ContentView: View {
                         Spacer().frame(height: 40)
                         HStack{
                             VStack{
-                                Text("Current temperature: \(f.responses.current.temp_f)")
+                                Text("Current temperature: \(Int(f.responses.current.temp_f))° f")
                                 Text("Current Weather: \(f.responses.current.condition?.text ?? "no data yet")")
                             }.font(.system(size: 20))
                             Image("wireframe").resizable().frame(width: 50, height: 50)
@@ -95,12 +95,14 @@ struct ContentView: View {
                             if (timeToInt(f.responses.location.localtime) < 19 && timeToInt(f.responses.location.localtime) > 5){
                                 Image("\(f.responses.current.condition?.code ?? 1000)")
                                     .resizable()
+                                    .ignoresSafeArea(.all)
                                     .aspectRatio(contentMode: .fill)
                                 
                                 //if it is night, uses a different image
                             }else{
                                 Image("night")
                                     .resizable()
+                                    .ignoresSafeArea(.all)
                                     .aspectRatio(contentMode: .fill)
                             }
                         }
@@ -116,7 +118,7 @@ struct ContentView: View {
                 
                 
             }
-        }.navigationBarTitle("").navigationBarHidden(true)
+        }.navigationBarTitle("").navigationBarHidden(true).ignoresSafeArea(.all)
         
         
     }

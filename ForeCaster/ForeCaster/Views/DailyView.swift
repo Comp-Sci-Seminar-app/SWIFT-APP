@@ -11,6 +11,8 @@ struct DailyView: View {
     var dayInfo : DPeriods
     var hInfo : [HPeriods]
     var index : Int
+    
+    //used to have a custom back button
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View { Button(action: {
         self.presentationMode.wrappedValue.dismiss()
@@ -24,10 +26,14 @@ struct DailyView: View {
         }
     }
     }
+    
     var body: some View {
+        //avoiding a weird issue
         var hLeft = getHowManyHoursAreLeftInToday()
         ZStack{
             VStack{
+                
+                //daily information
                 Spacer().frame(height: 100)
                 Text("\(dayInfo.detailedForecast)").background(Color.gray.opacity(0.6)).cornerRadius(7).frame(width: UIScreen.main.bounds.width - 60)
                 Spacer()
@@ -57,6 +63,8 @@ struct DailyView: View {
                 }.frame(height: 280)
                 
                 Spacer()
+                
+                //list of all the hour information, with offsets for making things right
                 ScrollView(.horizontal){
                     Group{
                         if index == 1{
