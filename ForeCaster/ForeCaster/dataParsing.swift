@@ -129,6 +129,8 @@ struct Response: Codable{
     var current : Current = Current()
     var forecast: Forecast = Forecast()
     var location: Location = Location()
+    var condition: Condition = Condition()
+    var hour : Hour = Hour()
 }
 
 struct Location: Codable{
@@ -141,9 +143,9 @@ struct Current: Codable{
     var condition : Condition?
 }
 struct Condition: Codable{
-    var text : String
-    var icon : String
-    var code : Int
+    var text : String = ""
+    var icon : String = ""
+    var code : Int = 1000
 }
 
 struct Forecast: Codable{

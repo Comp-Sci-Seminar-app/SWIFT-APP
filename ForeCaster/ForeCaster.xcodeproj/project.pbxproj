@@ -16,6 +16,15 @@
 		1AE48D8127C7D0A20077E87A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AE48D8027C7D0A20077E87A /* Preview Assets.xcassets */; };
 		1AE48D8C27C7D0A20077E87A /* ForeCasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D8B27C7D0A20077E87A /* ForeCasterTests.swift */; };
 		1AE48D9727C7D0A20077E87A /* ForeCasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */; };
+		3127875B27E95DB000C5BB7A /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127875A27E95DB000C5BB7A /* settings.swift */; };
+		31BEB5A427DF707100232F73 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BEB5A327DF707100232F73 /* WidgetKit.framework */; };
+		31BEB5A627DF707100232F73 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BEB5A527DF707100232F73 /* SwiftUI.framework */; };
+		31BEB5A927DF707100232F73 /* widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BEB5A827DF707100232F73 /* widget.swift */; };
+		31BEB5AC27DF707300232F73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31BEB5AB27DF707300232F73 /* Assets.xcassets */; };
+		31BEB5AE27DF707300232F73 /* widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 31BEB5AA27DF707100232F73 /* widget.intentdefinition */; };
+		31BEB5AF27DF707300232F73 /* widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 31BEB5AA27DF707100232F73 /* widget.intentdefinition */; };
+		31BEB5B227DF707300232F73 /* widgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 31BEB5A227DF707100232F73 /* widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		31BEB5B727DF74C500232F73 /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8A314F27C7D2150011870B /* dataParsing.swift */; };
 		418DE420F7143A7BC95E52BD /* libPods-ForeCaster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +43,28 @@
 			remoteGlobalIDString = 1AE48D7527C7D09F0077E87A;
 			remoteInfo = ForeCaster;
 		};
+		31BEB5B027DF707300232F73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AE48D6E27C7D09F0077E87A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 31BEB5A127DF707100232F73;
+			remoteInfo = widgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		31BEB5B327DF707300232F73 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				31BEB5B227DF707300232F73 /* widgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A7C4E1A27CFBE2C0074FB39 /* backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backend.swift; sourceTree = "<group>"; };
@@ -53,6 +83,14 @@
 		1AE48D9627C7D0A20077E87A /* ForeCasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCasterUITests.swift; sourceTree = "<group>"; };
 		1AE48D9827C7D0A20077E87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForeCaster.release.xcconfig"; path = "Target Support Files/Pods-ForeCaster/Pods-ForeCaster.release.xcconfig"; sourceTree = "<group>"; };
+		3127875A27E95DB000C5BB7A /* settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
+		31BEB5A227DF707100232F73 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		31BEB5A327DF707100232F73 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		31BEB5A527DF707100232F73 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		31BEB5A827DF707100232F73 /* widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = widget.swift; sourceTree = "<group>"; };
+		31BEB5AA27DF707100232F73 /* widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = widget.intentdefinition; sourceTree = "<group>"; };
+		31BEB5AB27DF707300232F73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		31BEB5AD27DF707300232F73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		760F9E2C63324A89A81D405A /* Pods-ForeCaster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForeCaster.debug.xcconfig"; path = "Target Support Files/Pods-ForeCaster/Pods-ForeCaster.debug.xcconfig"; sourceTree = "<group>"; };
 		F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ForeCaster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -80,6 +118,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		31BEB59F27DF707100232F73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31BEB5A627DF707100232F73 /* SwiftUI.framework in Frameworks */,
+				31BEB5A427DF707100232F73 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -96,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */,
+				31BEB5A327DF707100232F73 /* WidgetKit.framework */,
+				31BEB5A527DF707100232F73 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -105,6 +154,7 @@
 			children = (
 				1AE48D7827C7D09F0077E87A /* ForeCaster */,
 				1AE48D8A27C7D0A20077E87A /* ForeCasterTests */,
+				31BEB5A727DF707100232F73 /* widget */,
 				1AE48D9527C7D0A20077E87A /* ForeCasterUITests */,
 				1AE48D7727C7D09F0077E87A /* Products */,
 				0AE6FBC9F1C40CA026B7ABE0 /* Pods */,
@@ -118,6 +168,7 @@
 				1AE48D7627C7D09F0077E87A /* ForeCaster.app */,
 				1AE48D8727C7D0A20077E87A /* ForeCasterTests.xctest */,
 				1AE48D9227C7D0A20077E87A /* ForeCasterUITests.xctest */,
+				31BEB5A227DF707100232F73 /* widgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +184,7 @@
 				1AE48D7F27C7D0A20077E87A /* Preview Content */,
 				1A8A315127C7D7F50011870B /* AdvancedHourlyView.swift */,
 				1A7C4E1A27CFBE2C0074FB39 /* backend.swift */,
+				3127875A27E95DB000C5BB7A /* settings.swift */,
 			);
 			path = ForeCaster;
 			sourceTree = "<group>";
@@ -163,6 +215,17 @@
 			path = ForeCasterUITests;
 			sourceTree = "<group>";
 		};
+		31BEB5A727DF707100232F73 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				31BEB5A827DF707100232F73 /* widget.swift */,
+				31BEB5AA27DF707100232F73 /* widget.intentdefinition */,
+				31BEB5AB27DF707300232F73 /* Assets.xcassets */,
+				31BEB5AD27DF707300232F73 /* Info.plist */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,10 +237,12 @@
 				1AE48D7227C7D09F0077E87A /* Sources */,
 				1AE48D7327C7D09F0077E87A /* Frameworks */,
 				1AE48D7427C7D09F0077E87A /* Resources */,
+				31BEB5B327DF707300232F73 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				31BEB5B127DF707300232F73 /* PBXTargetDependency */,
 			);
 			name = ForeCaster;
 			productName = ForeCaster;
@@ -220,6 +285,23 @@
 			productReference = 1AE48D9227C7D0A20077E87A /* ForeCasterUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		31BEB5A127DF707100232F73 /* widgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31BEB5B627DF707300232F73 /* Build configuration list for PBXNativeTarget "widgetExtension" */;
+			buildPhases = (
+				31BEB59E27DF707100232F73 /* Sources */,
+				31BEB59F27DF707100232F73 /* Frameworks */,
+				31BEB5A027DF707100232F73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = widgetExtension;
+			productName = widgetExtension;
+			productReference = 31BEB5A227DF707100232F73 /* widgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -240,6 +322,9 @@
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = 1AE48D7527C7D09F0077E87A;
 					};
+					31BEB5A127DF707100232F73 = {
+						CreatedOnToolsVersion = 12.5;
+					};
 				};
 			};
 			buildConfigurationList = 1AE48D7127C7D09F0077E87A /* Build configuration list for PBXProject "ForeCaster" */;
@@ -258,6 +343,7 @@
 				1AE48D7527C7D09F0077E87A /* ForeCaster */,
 				1AE48D8627C7D0A20077E87A /* ForeCasterTests */,
 				1AE48D9127C7D0A20077E87A /* ForeCasterUITests */,
+				31BEB5A127DF707100232F73 /* widgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -283,6 +369,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31BEB5A027DF707100232F73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31BEB5AC27DF707300232F73 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,10 +412,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31BEB5AF27DF707300232F73 /* widget.intentdefinition in Sources */,
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
 				1A7C4E1B27CFBE2C0074FB39 /* backend.swift in Sources */,
 				1A8A315027C7D2150011870B /* dataParsing.swift in Sources */,
 				1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */,
+				3127875B27E95DB000C5BB7A /* settings.swift in Sources */,
 				1A8A315227C7D7F50011870B /* AdvancedHourlyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +438,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		31BEB59E27DF707100232F73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31BEB5AE27DF707300232F73 /* widget.intentdefinition in Sources */,
+				31BEB5B727DF74C500232F73 /* dataParsing.swift in Sources */,
+				31BEB5A927DF707100232F73 /* widget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -354,6 +460,11 @@
 			isa = PBXTargetDependency;
 			target = 1AE48D7527C7D09F0077E87A /* ForeCaster */;
 			targetProxy = 1AE48D9327C7D0A20077E87A /* PBXContainerItemProxy */;
+		};
+		31BEB5B127DF707300232F73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 31BEB5A127DF707100232F73 /* widgetExtension */;
+			targetProxy = 31BEB5B027DF707300232F73 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -478,6 +589,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 760F9E2C63324A89A81D405A /* Pods-ForeCaster.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -501,6 +613,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -604,6 +717,48 @@
 			};
 			name = Release;
 		};
+		31BEB5B427DF707300232F73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4QTYLSM938;
+				INFOPLIST_FILE = widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Smartester-People-CO.ForeCaster.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		31BEB5B527DF707300232F73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4QTYLSM938;
+				INFOPLIST_FILE = widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Smartester-People-CO.ForeCaster.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -639,6 +794,15 @@
 			buildConfigurations = (
 				1AE48DA227C7D0A20077E87A /* Debug */,
 				1AE48DA327C7D0A20077E87A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31BEB5B627DF707300232F73 /* Build configuration list for PBXNativeTarget "widgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31BEB5B427DF707300232F73 /* Debug */,
+				31BEB5B527DF707300232F73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
