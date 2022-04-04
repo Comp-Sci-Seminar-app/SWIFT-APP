@@ -173,10 +173,12 @@ func returnHourList(hp: [HPeriods]) -> [Int]{
     var listOfH : [Int] = []
     let offset = getHourOffset(hp[0])
     for hour in hp{
-        if((hour.shortForecast?.contains("rain")) != nil){
+        let sF = hour.shortForecast!
+        if(sF.contains("Rain")){
             listOfH.append(hour.number - offset)
         }
     }
+    print("\(listOfH)")
     return listOfH
 }
 
@@ -187,6 +189,6 @@ func getHourOffset(_ firstHour: HPeriods) -> Int{
     let hour = calendar.component(.hour, from: date)
     var sTime = makeTimeNice(firstHour.startTime, twentyFour: true)
     sTime.remove(at: sTime.firstIndex(of: ":")!)
-    let timeInt = Int(sTime)
-    return (hour - (timeInt ?? 0))
+    let timeInt = Int(sTime)! / 100
+    return (hour - (timeInt))
 }

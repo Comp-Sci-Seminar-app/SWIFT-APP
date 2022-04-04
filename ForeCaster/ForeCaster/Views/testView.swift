@@ -21,9 +21,9 @@ struct testView: View {
         let hInfo = g.hForecast.properties.periods//all of the important info passed by the API for hourly
         let heightOffset = 90+offset.y//the normal offset is 90 off because of how spacers work in scrollviews, this makes it
         var hLeft = getHowManyHoursAreLeftInToday()
-        let index = 5
+        let allHourly = g.hForecast.properties.periods
         
-        HStack{
+        VStack{
             
         //    ForEach((hLeft + (24 * (index - 1)))..<(hLeft + (24 * index))){i in
            
@@ -31,7 +31,13 @@ struct testView: View {
        //     }
             //.opacity(0)
             //     hourlyPreView(i:i, hInfo: hInfo)
-            Spacer()
+            Text("\(allDaily[0].detailedForecast)")
+            Button(action: {returnHourList(hp: allHourly)}, label: {
+                Text("thingy")
+            })
+            Button(action: {print(getHourOffset(allHourly[0]))}, label: {
+                Text("thingy2")
+            })
         }
     }
 }
