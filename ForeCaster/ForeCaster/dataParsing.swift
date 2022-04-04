@@ -129,8 +129,6 @@ struct Response: Codable{
     var current : Current = Current()
     var forecast: Forecast = Forecast()
     var location: Location = Location()
-    var condition: Condition = Condition()
-    var hour : Hour = Hour()
 }
 
 struct Location: Codable{
@@ -143,9 +141,9 @@ struct Current: Codable{
     var condition : Condition?
 }
 struct Condition: Codable{
-    var text : String = ""
-    var icon : String = ""
-    var code : Int = 1000
+    var text : String
+    var icon : String
+    var code : Int
 }
 
 struct Forecast: Codable{
@@ -257,12 +255,4 @@ func URlForm(_ address : String = "618 Schiller Ave", city : String = "Merion St
     //print("In URLForm: "+finalURL)//prints for debug
     print(finalURL)
     return finalURL//returns the url
-}
-func timeToInt(_ rawTime : String) -> Int {
-    let tTime0 : String = String(rawTime[rawTime.lastIndex(of: " ")!...])
-    let tTime : String = String(tTime0.dropFirst())
-    let tTime2 : String = String(tTime[...tTime.firstIndex(of: ":")!])
-    let tTime3 : String = String(tTime2.dropLast())
-    let time = Int(tTime3) ?? 0
-    return time
 }

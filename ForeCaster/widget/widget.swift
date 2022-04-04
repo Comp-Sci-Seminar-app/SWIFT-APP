@@ -48,24 +48,21 @@ struct widgetEntryView : View {
     let test = 1
     var entry: Provider.Entry
     var body: some View {
-        let test1 = f.responses.hour.time
         ZStack{
-            let start = test1.index(test1.startIndex, offsetBy: 10)
-            let end = test1.index(test1.endIndex, offsetBy: -3)
-            let index = start..<end
-            let test = (Int)(test1[index])
-           if test! >= 19 || test! <= 7{
-                Image("1069")
-            }
-           else{
-                
-                Image((String)(f.responses.condition.code))
+            if (timeToInt(f.responses.location.localtime) < 19 && timeToInt(f.responses.location.localtime) > 5){
+                Image("\(f.responses.current.condition?.code ?? 1000)")
                     .resizable()
-                    .frame(width: 200, height: 200, alignment: .center)
+                    .aspectRatio(contentMode: .fill)
+                
+                //if it is night, uses a different image
+            }else{
+                Image("night")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
             }
             VStack{
-            Text((String)(f.responses.current.temp_f ) + " F")
-                Text((String)(test!))
+                Text((String)(f.responses.current.temp_f ) + " F")
+                Text((String)(test))
             }
         }
     }
@@ -90,4 +87,14 @@ struct widget_Previews: PreviewProvider {
         widgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
+}
+
+//FAR from the best way to do it, but its how im gonna do it so fight me!
+func timeToInt(_ rawTime : String) -> Int {
+    let tTime0 : String = String(rawTime[rawTime.lastIndex(of: " ")!...])
+    let tTime : String = String(tTime0.dropFirst())
+    let tTime2 : String = String(tTime[...tTime.firstIndex(of: ":")!])
+    let tTime3 : String = String(tTime2.dropLast())
+    let time = Int(tTime3) ?? 0
+    return time
 }
