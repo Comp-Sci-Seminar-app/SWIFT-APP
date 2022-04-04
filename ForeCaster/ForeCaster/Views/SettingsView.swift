@@ -8,19 +8,13 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var t: [Notification] = [Notification(weather: "Sun", time: 120.0), Notification(weather: "Rain", time: 60.0)]
+    @StateObject var g = Decoded()// new API
+    @StateObject var f = FetchData()// old API
     
-    
-    //Only goes in hours
-    func timeInSeconds(p : String) -> Double {
-        var multiplier: Double = 1.0
-        if p == "8:00 AM"{
-            multiplier = 1.0
-        }
-        return 3600.0 * multiplier
-    }
     
     var body: some View {
+        let allHourly = g.hForecast.properties.periods
+
         VStack {
             Button("Request Permission") {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
@@ -36,9 +30,17 @@ struct SettingsView: View {
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 
-                for i in t{
-                    i.setNotification(t: i)
+                for i in returnHourList(hp: allHourly){
+                    let content = UNMutableNotificationContent()
+                    content.title = "Weather Notification"
+                    content.subtitle = "Rain"
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(i), repeats: false)
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
+                    UNUserNotificationCenter.current().add(request)
+                    print("\(i)")
                 }
+                
             }
             Button("Remove Notifications") {
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
