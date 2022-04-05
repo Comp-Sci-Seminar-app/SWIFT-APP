@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct SettingsView: View {
     @StateObject var g = Decoded()// new API
@@ -34,9 +35,9 @@ struct SettingsView: View {
                     let content = UNMutableNotificationContent()
                     content.title = "Weather Notification"
                     content.subtitle = "Rain"
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(i), repeats: false)
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(i * 2), repeats: false)
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request)
                     print("\(i)")
                 }
