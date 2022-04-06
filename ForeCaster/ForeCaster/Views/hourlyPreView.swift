@@ -22,7 +22,7 @@ struct hourlyPreView: View {
                 Text(" \(Image(systemName: "wind")) 0 mph ").foregroundColor(.white)
             }
             //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
-        }.background(Color.blue.opacity(0.5))
+        }.background(Color.customBlue.opacity(0.5))
         .cornerRadius(10)
         .frame(alignment: .center)
     }

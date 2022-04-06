@@ -49,7 +49,7 @@ struct WeatherView: View {
                                 Text("Current Weather: \(f.responses.current.condition?.text ?? "no data yet")")
                             }.font(.system(size: 20))
                             Image("wireframe").resizable().frame(width: 50, height: 50)
-                        }.frame(width: UIScreen.main.bounds.width - 10, height: 70).background(Color.blue.opacity(0.6)).cornerRadius(20)
+                        }.frame(width: UIScreen.main.bounds.width - 10, height: 70).background(Color.customBlue.opacity(0.6)).cornerRadius(20)
                         Spacer()
                         ScrollView(showsIndicators: false) {
                             //scrollview with the actual info
@@ -65,7 +65,7 @@ struct WeatherView: View {
                                         Text(" \(Image(systemName: "thermometer")) \(allDaily[(index * 2) - dayOffset].temperature) \(allDaily[(index * 2) - dayOffset].temperatureUnit) ").foregroundColor(.white)
                                         Text(" \(Image(systemName: "wind")) \(allDaily[(index * 2) - dayOffset].windSpeed) \(allDaily[(index * 2) - dayOffset].windDirection) ").foregroundColor(.white)
                                         //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
-                                    }.frame(width: UIScreen.main.bounds.width - 10, height: 130).background(Color.blue.opacity(0.5))
+                                    }.frame(width: UIScreen.main.bounds.width - 10, height: 130).background(Color.customBlue.opacity(0.5))
                                     .cornerRadius(10)
                                     .frame(alignment: .center).font(.system(size: 30))
                                     
