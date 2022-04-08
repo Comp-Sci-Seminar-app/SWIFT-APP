@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 func URLForm(_ address : String = "618 Schiller Ave", city : String = "Merion Station", state : String = "PA", zip : String = "19066") -> String{//function reads in an address and outputs a string url
     var finalURL  = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address="//static portion of the URL that holds the paramaters we dont need to change
@@ -22,6 +23,7 @@ class Decoded : ObservableObject{
     @Published var dForecast = DForecast()//variable containing the daily forcast json's results
     @Published var hForecast = HForecast()//variable containing the hourly forcast json's results
     var locationManager = LocationManager.shared
+    
     init() {
         if locationManager.userLocation == nil{
         decodeGeo()//starts the decoding process on initilization
@@ -119,11 +121,15 @@ class Decoded : ObservableObject{
     }
 }
 class FetchData : ObservableObject{
+    var locationManager = LocationManager.shared
     @Published var responses = Response()
+    @Published var geocode = Recived()
+    
+    
     //this part is copy and pasted from another JSON file, I just changed the url.
     init(){
-        
-        let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=c6a8b99c194944a5bf0162452211612&q=19066&days=1&aqi=yes&alerts=no")!
+        let zip = getAddressFromLatLon(pdblLatitude: "\(locationManager.userLocation?.coordinate.latitude ?? 40)", withLongitude: "\(locationManager.userLocation?.coordinate.longitude ?? -74)")
+        let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=c6a8b99c194944a5bf0162452211612&q=\(zip)&days=1&aqi=yes&alerts=no")!
         
         URLSession.shared.dataTask(with: url) { (data, response, errors) in
             
@@ -234,8 +240,8 @@ struct FDProperties: Codable{
 struct DPeriods : Codable{
     var number : Int = 0
     var name : String = ""
-    var startTime : String = ""
-    var endTime : String = ""
+    var startTime : String = "2022-04-07T08:00:00-04:00"
+    var endTime : String = "2022-04-07T08:00:00-04:00"
     var isDaytime : Bool?
     var temperature : Int = 0
     var temperatureUnit : String = ""
@@ -257,8 +263,8 @@ struct FHProperties: Codable{
 struct HPeriods : Codable{
     var number : Int = 0
     var name : String = ""
-    var startTime : String = ""
-    var endTime : String = ""
+    var startTime : String = "2022-04-07T08:00:00-04:00"
+    var endTime : String = "2022-04-07T08:00:00-04:00"
     var isDaytime : Bool = true
     var temperature : Int = 0
     var temperatureUnit : String = ""
@@ -277,3 +283,61 @@ func URlForm(_ address : String = "618 Schiller Ave", city : String = "Merion St
     //print("In URLForm: "+finalURL)//prints for debug
     return finalURL//returns the url
 }
+
+
+//extreme overkill just to get data from longitude and lattitude
+func getAddressFromLatLon(pdblLatitude: String, withLongitude pdblLongitude: String) -> String {
+        var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
+        let lat: Double = Double("\(pdblLatitude)")!
+        //21.228124
+        let lon: Double = Double("\(pdblLongitude)")!
+        //72.833770
+        let ceo: CLGeocoder = CLGeocoder()
+        center.latitude = lat
+        center.longitude = lon
+
+        let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
+        var postalC = "19066"
+
+        ceo.reverseGeocodeLocation(loc, completionHandler:
+            {(placemarks, error) in
+                if (error != nil)
+                {
+                    print("reverse geodcode fail: \(error!.localizedDescription)")
+                }
+                let pm = placemarks! as [CLPlacemark]
+            
+                postalC = pm[0].postalCode ?? "19066"
+                print(postalC)
+                if pm.count > 0 {
+                    let pm = placemarks![0]
+ 
+
+                    postalC = pm.postalCode ?? "19066"
+
+                    var addressString : String = ""
+                    if pm.subLocality != nil {
+                        addressString = addressString + pm.subLocality! + ", "
+                    }
+                    if pm.thoroughfare != nil {
+                        addressString = addressString + pm.thoroughfare! + ", "
+                    }
+                    if pm.locality != nil {
+                        addressString = addressString + pm.locality! + ", "
+                    }
+                    if pm.country != nil {
+                        addressString = addressString + pm.country! + ", "
+                    }
+                    if pm.postalCode != nil {
+                        addressString = addressString + pm.postalCode! + " "
+                    }
+
+
+              }
+        })
+    //print(postalC)
+    return postalC
+        
+    
+
+    }

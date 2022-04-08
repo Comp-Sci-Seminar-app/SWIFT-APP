@@ -34,14 +34,14 @@ struct SettingsView: View {
                     }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.gray))
                     Spacer()
                     Button("Schedule Notification") {
-                        twentyFourHourClock = true
+                        //twentyFourHourClock = true
                         //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                        // UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                         
                         for i in returnHourList(hp: allHourly){
                             let content = UNMutableNotificationContent()
                             content.title = "Weather Notification"
-                            content.subtitle = "Rain"
+                            content.subtitle = keyWord
                             content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
                             var modifiableI = i
                             if ((i - hourOffest.rawValue) > 0){
@@ -66,7 +66,7 @@ struct SettingsView: View {
                     
                     Text("You know those short forcasts for hours? If you enter a word in here and create notifications, this will search through every hour loaded and create a notification for each one.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                     Spacer().frame(height: 10)
-                    Text("Note: this will create notifications for today going into a week from now. you can delete them at any time. Also this will change your time to 24 hour time. ").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
+                    Text("Note: this will create notifications for today going into a week from now. you can delete them at any time.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                    
                 }
                 Spacer().frame(height: 60)
