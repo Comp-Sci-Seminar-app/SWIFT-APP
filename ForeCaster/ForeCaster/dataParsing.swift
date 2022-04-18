@@ -168,6 +168,9 @@ struct Hour: Codable{
     var condition : Condition?
     var wind_mph : Double = 0
     var feelslike_f : Double = 0
+    var will_it_rain : Int = 0
+    var will_it_snow : Int = 0
+    var humidity : Int = 0
 }
 extension Hour: Identifiable{
     var id: String {return time}
