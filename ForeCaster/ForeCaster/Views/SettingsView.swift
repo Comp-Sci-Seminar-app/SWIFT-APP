@@ -12,7 +12,6 @@ struct SettingsView: View {
     @StateObject var g = Decoded()// new API
     @StateObject var f = FetchData()// old API
     
-    
     var body: some View {
         let allHourly = g.hForecast.properties.periods
 
@@ -35,7 +34,7 @@ struct SettingsView: View {
                     let content = UNMutableNotificationContent()
                     content.title = "Weather Notification"
                     content.subtitle = "Rain"
-                    content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
+                    content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "kricketune.mp3"))
                     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(i * 2), repeats: false)
                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request)
@@ -50,4 +49,5 @@ struct SettingsView: View {
         }
     }
 }
+
 
