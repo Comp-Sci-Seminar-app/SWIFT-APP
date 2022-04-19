@@ -70,7 +70,6 @@ struct idealTempModleView: View{
     @State var rain = false
     @State var snow = false
     @StateObject var f = FetchData()
-    
     @StateObject var idealism = idealTime(data: FetchData().responses.forecast.forecastday[0].hour, tempNum: 0.0, rain: 0, snow: 0, humidity: 0)
     
     var intProxy: Binding<Double>{
@@ -90,8 +89,12 @@ struct idealTempModleView: View{
             Spacer()
             
             HStack{
-                Toggle(isOn: $rain, label: {Text("Rain?")})
-                Toggle(isOn: $snow, label: {Text("Snow?")})
+                Toggle(isOn: $rain, label: {Text("Rain?")}).onChange(of: rain, perform: { value in
+                    idealism.setRain(r: rain)
+                })
+                Toggle(isOn: $snow, label: {Text("Snow?")}).onChange(of: snow, perform: { value in
+                    idealism.setSnow(s: snow)
+                })
                 
             }.background(Color.customGray.opacity(0.8))
             Spacer()
@@ -109,16 +112,21 @@ struct idealTempModleView: View{
                 //twentyFourHourClock = true
                 //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 // UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                idealism.setRain(r: rain)
+                idealism.setSnow(s: snow)
+                idealism.findIdealTime()
                 
-                
-                let content = UNMutableNotificationContent()
-                content.title = "Ideal Temperature"
-                content.subtitle = "keyWord"
-                content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
-                
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(1), repeats: false)
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                UNUserNotificationCenter.current().add(request)
+                for i in idealism.data{
+                    let content = UNMutableNotificationContent()
+                    content.title = "Ideal Temperature"
+                    content.subtitle = "Allan please add details"
+                    content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
+                    
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeToInt(i.time)), repeats: false)
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request)
+                }
+               
                 
                 
                 
