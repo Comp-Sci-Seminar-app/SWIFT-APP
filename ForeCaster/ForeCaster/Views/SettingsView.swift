@@ -13,10 +13,14 @@ struct SettingsView: View {
     @AppStorage("24h") var twentyFourHourClock : Bool = false
     @AppStorage("keyword") var keyWord : String = "Rain"
     @State var hourOffest : HourOffsetList = HourOffsetList.Zero
+    @State private var showingSheet = true
     var body: some View {
         let allHourly = g.hForecast.properties.periods
         VStack {
             ScrollView{
+                
+                
+                
                 Spacer().frame(height: 30)
                 Toggle(isOn: $twentyFourHourClock, label: {Text("24 Hour time?")})
                 
@@ -103,6 +107,9 @@ struct SettingsView: View {
             }
             
         )
+        .sheet(isPresented: $showingSheet){
+            LocationRequestView(showSheet: $showingSheet)
+        }
     }
 }
 
