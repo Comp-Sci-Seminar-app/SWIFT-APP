@@ -10,7 +10,7 @@ struct ContentView: View {
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "gear")
                 }
-        }
+        }.ignoresSafeArea(.all)
 
     }
 }

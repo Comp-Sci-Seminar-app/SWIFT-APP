@@ -120,7 +120,7 @@ struct SettingsView: View {
             LocationRequestView(showSheet: $showingSheet)
         }
         .sheet(isPresented: $showingIdeal){
-            idealTempModleView()
+            idealTempModleView().opacity(0.8)
         }
     }
 }

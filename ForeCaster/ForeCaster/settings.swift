@@ -55,50 +55,50 @@ struct idealTempModleView: View{
         
         VStack{
             Spacer()
-            Text("Hours that match conditions will show up green. otherwise it will be gray")
+            Text("Hours that match conditions will show up green. otherwise it will be gray. If humidity is -1 then it will be ignored").frame(width: UIScreen.main.bounds.width).background(Color.customGray).font(.system(size: 20))
             Toggle(isOn: $rain, label: {
-                Text("Rain?")
+                Text("Rain?").frame(width: UIScreen.main.bounds.width - 30).background(Color.customGray)
             })
             Toggle(isOn: $snow, label: {
-                Text("Snow?")
+                Text("Snow?").frame(width: UIScreen.main.bounds.width - 30).background(Color.customGray)
             })
             VStack{
-                Text("Humidity: \(humidity)")
-                Slider(value: intProxy, in: 0...100){
+                Text("Humidity: \(humidity)").frame(width: UIScreen.main.bounds.width).background(Color.customGray)
+                Slider(value: intProxy, in: -1...100){
                     
                 }
                 
             }
             VStack{
-                Text("Temperature \(temp)")
+                Text("Temperature \(temp)").frame(width: UIScreen.main.bounds.width).background(Color.customGray)
                 Slider(value: $temp, in: -40...120){
-                   
+                    
                 }
                 Spacer()
                 
             }
             ScrollView(.horizontal){
                 HStack{
-                ForEach(0..<24){ i in
-                    ZStack{
-                        Group{
-                            
-                            if findIdealTime(h: f.responses.forecast.forecastday[0].hour[i], tempNum: temp, rain: rain, snow: snow, humidity: humidity){
-                                Rectangle().frame(width: 100, height: 100).foregroundColor(Color.green).cornerRadius(30)
-                            }else{
-                                Rectangle().frame(width: 100, height: 100).foregroundColor(Color.customGray).cornerRadius(30)
+                    ForEach(0..<24){ i in
+                        ZStack{
+                            Group{
+                                
+                                if findIdealTime(h: f.responses.forecast.forecastday[0].hour[i], tempNum: temp, rain: rain, snow: snow, humidity: humidity){
+                                    Rectangle().frame(width: 100, height: 100).foregroundColor(Color.green).cornerRadius(30)
+                                }else{
+                                    Rectangle().frame(width: 100, height: 100).foregroundColor(Color.customGray).cornerRadius(30)
+                                }
+                                
                             }
-                            
-                        }
-                        VStack{
-                            Text("Time:")
-                            Text("\(timeToInt(f.responses.forecast.forecastday[0].hour[i].time)):00")
+                            VStack{
+                                Text("Time:")
+                                Text("\(timeToInt(f.responses.forecast.forecastday[0].hour[i].time)):00")
+                            }
                         }
                     }
                 }
-                }
             }
-        }.background(Color.customBlue)
+        }.background(Color.blue)
     }
 }
 
@@ -126,7 +126,9 @@ func findIdealTime(h: Hour, tempNum: Double, rain: Bool, snow: Bool, humidity: I
         return false
     }
     else if h.humidity < humidity-5 || h.humidity > humidity+5{
-        return false
+        if humidity > -1{
+            return false
+        }
     }
     
     return true
