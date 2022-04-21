@@ -54,8 +54,9 @@ struct idealTempModleView: View{
     var body: some View{
         
         VStack{
+            
             Spacer()
-            Text("Hours that match conditions will show up green. otherwise it will be gray. If humidity is -1 then it will be ignored").frame(width: UIScreen.main.bounds.width).background(Color.customGray).font(.system(size: 20))
+            Text("Hours that match conditions will show up green. otherwise it will be gray. If humidity is -1 then it will be ignored.").frame(width: UIScreen.main.bounds.width).background(Color.customGray).font(.system(size: 20))
             Toggle(isOn: $rain, label: {
                 Text("Rain?").frame(width: UIScreen.main.bounds.width - 30).background(Color.customGray)
             })
@@ -66,14 +67,22 @@ struct idealTempModleView: View{
                 Text("Humidity: \(humidity)").frame(width: UIScreen.main.bounds.width).background(Color.customGray)
                 Slider(value: intProxy, in: -1...100){
                     
-                }
+                }.padding().accentColor(.yellow).overlay(
+                    RoundedRectangle(cornerRadius: 15.0)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(Color.yellow)
+                )
                 
             }
             VStack{
                 Text("Temperature \(temp)").frame(width: UIScreen.main.bounds.width).background(Color.customGray)
                 Slider(value: $temp, in: -40...120){
                     
-                }
+                }.padding().accentColor(.yellow).overlay(
+                    RoundedRectangle(cornerRadius: 15.0)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(Color.yellow)
+                )
                 Spacer()
                 
             }
@@ -116,7 +125,7 @@ func findIdealTime(h: Hour, tempNum: Double, rain: Bool, snow: Bool, humidity: I
     }
     
     
-    if h.temp_f > tempNum+2 || h.temp_f < tempNum - 2{
+    if h.temp_f > tempNum+5 || h.temp_f < tempNum - 5{
         return false
     }
     else if h.will_it_rain != rainNum{
