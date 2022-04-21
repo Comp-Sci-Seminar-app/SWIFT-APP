@@ -178,7 +178,7 @@ func returnHourList(hp: [HPeriods]) -> [Int]{
         n+=1
         print(sF)
         print(n)
-        if((sF.contains(keyWord))){
+        if((sF.contains(keyWord)) && hour.number - offset > 0){
             listOfH.append(hour.number - offset)
         }
     }
