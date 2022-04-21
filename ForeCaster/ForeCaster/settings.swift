@@ -54,6 +54,7 @@ struct idealTempModleView: View{
     var body: some View{
         
         VStack{
+            Spacer()
             Text("Hours that match conditions will show up green. otherwise it will be gray")
             Toggle(isOn: $rain, label: {
                 Text("Rain?")
@@ -61,15 +62,17 @@ struct idealTempModleView: View{
             Toggle(isOn: $snow, label: {
                 Text("Snow?")
             })
-            HStack{
+            VStack{
+                Text("Humidity: \(humidity)")
                 Slider(value: intProxy, in: 0...100){
-                    Text("Humidity")
+                    
                 }
                 
             }
-            HStack{
-                Slider(value: $temp, in: 0...100){
-                    Text("Humidity")
+            VStack{
+                Text("Temperature \(temp)")
+                Slider(value: $temp, in: -40...120){
+                   
                 }
                 Spacer()
                 
