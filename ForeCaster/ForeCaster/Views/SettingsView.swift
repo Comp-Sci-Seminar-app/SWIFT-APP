@@ -14,6 +14,7 @@ struct SettingsView: View {
     @AppStorage("keyword") var keyWord : String = "Rain"
     @State var hourOffest : HourOffsetList = HourOffsetList.Zero
     @State private var showingSheet = false
+    @State private var showingIdeal = false
     var body: some View {
         let allHourly = g.hForecast.properties.periods
         VStack {
@@ -27,6 +28,10 @@ struct SettingsView: View {
                     Spacer()
                     Button("Change Location") {
                         showingSheet.toggle()
+                    }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.gray))
+                    Spacer()
+                    Button("Find ideal Hours") {
+                        showingIdeal.toggle()
                     }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.gray))
                     Spacer()
                 }
@@ -113,6 +118,9 @@ struct SettingsView: View {
         )
         .sheet(isPresented: $showingSheet){
             LocationRequestView(showSheet: $showingSheet)
+        }
+        .sheet(isPresented: $showingIdeal){
+            idealTempModleView()
         }
     }
 }

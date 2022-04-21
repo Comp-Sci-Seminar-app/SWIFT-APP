@@ -27,115 +27,108 @@ class idealTime: ObservableObject{
     }
     
     
-    func findIdealTime(){
-        
-        for index in (0..<data.count).reversed(){
-            
-            if data[index].temp_f > tempNum+2 || data[index].temp_f < tempNum - 2{
-                data.remove(at: index)
-            }
-            else if data[index].will_it_rain != rain{
-                data.remove(at: index)
-            }
-            else if data[index].will_it_snow != snow{
-                data.remove(at: index)
-            }
-            else if data[index].humidity < humidity-5 || data[index].humidity > humidity+5{
-                data.remove(at: index)
-            }
-            
-            
-        }
-        
-        
-    }
-    func setRain(r: Bool){
-        if r{
-            self.rain = 1
-        }else{
-            self.rain = 0
-        }
-    }
-    func setSnow(s: Bool){
-        if s{
-            self.snow = 1
-        }else{
-            self.snow = 0
-        }
-    }
+    
+    
 }
 
 struct idealTempModleView: View{
     @Environment(\.presentationMode) private var presentationMode
     @State var rain = false
     @State var snow = false
+    @State var humidity = 0
+    @State var temp = 0.0
     @StateObject var f = FetchData()
-    @StateObject var idealism = idealTime(data: FetchData().responses.forecast.forecastday[0].hour, tempNum: 0.0, rain: 0, snow: 0, humidity: 0)
+    
     
     var intProxy: Binding<Double>{
         Binding<Double>(get: {
             //returns the score as a Double
-            return Double(idealism.humidity)
+            return Double(humidity)
         }, set: {
             //rounds the double to an Int
             
-            idealism.humidity = Int($0)
+            humidity = Int($0)
         })
     }
     
     var body: some View{
         
         VStack{
-            Spacer()
-            
+            Text("Hours that match conditions will show up green. otherwise it will be gray")
+            Toggle(isOn: $rain, label: {
+                Text("Rain?")
+            })
+            Toggle(isOn: $snow, label: {
+                Text("Snow?")
+            })
             HStack{
-                Toggle(isOn: $rain, label: {Text("Rain?")}).onChange(of: rain, perform: { value in
-                    idealism.setRain(r: rain)
-                })
-                Toggle(isOn: $snow, label: {Text("Snow?")}).onChange(of: snow, perform: { value in
-                    idealism.setSnow(s: snow)
-                })
-                
-            }.background(Color.customGray.opacity(0.8))
-            Spacer()
-            HStack{
-                Slider(value: intProxy, in: (0...100))
-                Text("% humidity: \(idealism.humidity)")
-            }.background(Color.customGray.opacity(0.8))
-            Spacer()
-            HStack{
-                Slider(value: $idealism.tempNum, in: (-40...120))
-                Text("Ideal Temperature in Fahrenheit: \(idealism.tempNum)")
-            }.background(Color.customGray.opacity(0.8))
-            Spacer()
-            Button("Schedule Notification") {
-                //twentyFourHourClock = true
-                //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                // UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-                idealism.setRain(r: rain)
-                idealism.setSnow(s: snow)
-                idealism.findIdealTime()
-                
-                for i in idealism.data{
-                    let content = UNMutableNotificationContent()
-                    content.title = "Ideal Temperature"
-                    content.subtitle = "Allan please add details"
-                    content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
-                    
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeToInt(i.time)), repeats: false)
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                    UNUserNotificationCenter.current().add(request)
+                Slider(value: intProxy, in: 0...100){
+                    Text("Humidity")
                 }
-               
                 
+            }
+            HStack{
+                Slider(value: $temp, in: 0...100){
+                    Text("Humidity")
+                }
+                Spacer()
                 
-                
-            }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.customGray))
-            Spacer()
-            Button("Remove Notifications") {
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-            }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.customGray))
+            }
+            ScrollView(.horizontal){
+                HStack{
+                ForEach(0..<24){ i in
+                    ZStack{
+                        Group{
+                            
+                            if findIdealTime(h: f.responses.forecast.forecastday[0].hour[i], tempNum: temp, rain: rain, snow: snow, humidity: humidity){
+                                Rectangle().frame(width: 100, height: 100).foregroundColor(Color.green).cornerRadius(30)
+                            }else{
+                                Rectangle().frame(width: 100, height: 100).foregroundColor(Color.customGray).cornerRadius(30)
+                            }
+                            
+                        }
+                        VStack{
+                            Text("Time:")
+                            Text("\(timeToInt(f.responses.forecast.forecastday[0].hour[i].time)):00")
+                        }
+                    }
+                }
+                }
+            }
         }.background(Color.customBlue)
     }
+}
+
+
+func findIdealTime(h: Hour, tempNum: Double, rain: Bool, snow: Bool, humidity: Int) -> Bool{
+    var rainNum = 0
+    var snowNum = 0
+    
+    if rain{
+        rainNum = 1
+    }
+    
+    if snow{
+        snowNum = 1
+    }
+    
+    
+    if h.temp_f > tempNum+2 || h.temp_f < tempNum - 2{
+        return false
+    }
+    else if h.will_it_rain != rainNum{
+        return false
+    }
+    else if h.will_it_snow != snowNum{
+        return false
+    }
+    else if h.humidity < humidity-5 || h.humidity > humidity+5{
+        return false
+    }
+    
+    return true
+    
+    
+    
+    
 }
