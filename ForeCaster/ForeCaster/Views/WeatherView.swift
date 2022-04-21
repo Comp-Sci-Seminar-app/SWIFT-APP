@@ -20,7 +20,7 @@ struct WeatherView: View {
     @StateObject var f = FetchData()// old API
     @State var offset: CGPoint = .zero// this is the offset of the scroll view
     @State var coeffOfWidth = (UIScreen.main.bounds.width/2)-73
-    @State private var showingSheet = true
+    @AppStorage("locationRequest") private var showingSheet = true
     
     
     let hoursLeft = getHowManyHoursAreLeftInToday()

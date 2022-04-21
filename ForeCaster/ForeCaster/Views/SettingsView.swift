@@ -13,19 +13,23 @@ struct SettingsView: View {
     @AppStorage("24h") var twentyFourHourClock : Bool = false
     @AppStorage("keyword") var keyWord : String = "Rain"
     @State var hourOffest : HourOffsetList = HourOffsetList.Zero
-    @State private var showingSheet = true
+    @State private var showingSheet = false
     var body: some View {
         let allHourly = g.hForecast.properties.periods
         VStack {
             ScrollView{
                 
                 
-                
-                Spacer().frame(height: 30)
-                Toggle(isOn: $twentyFourHourClock, label: {Text("24 Hour time?")})
-                
-                Spacer()
-                
+                VStack{
+                    Spacer().frame(height: 30)
+                    Toggle(isOn: $twentyFourHourClock, label: {Text("24 Hour time?")})
+                    
+                    Spacer()
+                    Button("Change Location") {
+                        showingSheet.toggle()
+                    }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.gray))
+                    Spacer()
+                }
                 VStack{
                     Button("Request Notification Permission") {
                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
@@ -40,7 +44,7 @@ struct SettingsView: View {
                     Button("Schedule Notification") {
                         //twentyFourHourClock = true
                         //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                       // UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                        // UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                         
                         for i in returnHourList(hp: allHourly){
                             let content = UNMutableNotificationContent()
@@ -71,7 +75,7 @@ struct SettingsView: View {
                     Text("You know those short forcasts for hours? If you enter a word in here and create notifications, this will search through every hour loaded and create a notification for each one.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                     Spacer().frame(height: 10)
                     Text("Note: this will create notifications for today going into a week from now. you can delete them at any time.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
-                   
+                    
                 }
                 Spacer().frame(height: 60)
                 Text("More Below").font(.system(size: 50)).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
