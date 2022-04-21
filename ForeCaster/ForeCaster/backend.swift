@@ -11,7 +11,6 @@ import CoreLocation
 
 
 //allows me to set the back button to invisible so I can add a custom image behind it. Also copy and pasted from stack overflow
-
 class Theme {
     static func navigationBarColors(background : UIColor?,
                                     titleColor : UIColor? = nil, tintColor : UIColor? = nil ){
@@ -170,6 +169,7 @@ func nightOrDay(dp: DPeriods) -> Int{
 //Real spooky of you gov't
 //probably busy telling us birds aren't real
 func returnHourList(hp: [HPeriods]) -> [Int]{
+    @AppStorage("keyword") var keyWord : String = "Rain"
     var listOfH : [Int] = []
     let offset = getHourOffset(hp[0])
     var n = 0
@@ -178,7 +178,7 @@ func returnHourList(hp: [HPeriods]) -> [Int]{
         n+=1
         print(sF)
         print(n)
-        if((sF.contains("Rain"))){
+        if((sF.contains(keyWord))){
             listOfH.append(hour.number - offset)
         }
     }
@@ -195,4 +195,35 @@ func getHourOffset(_ firstHour: HPeriods) -> Int{
     sTime.remove(at: sTime.firstIndex(of: ":")!)
     let timeInt = Int(sTime)! / 100
     return (hour - (timeInt))
+}
+struct NeumorphicButtonStyle: ButtonStyle {
+    var bgColor: Color
+
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .padding(20)
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .shadow(color: .white, radius: configuration.isPressed ? 7: 10, x: configuration.isPressed ? 5: 15, y: configuration.isPressed ? 5: 15)
+                        .blendMode(.overlay)
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(bgColor)
+                }
+        )
+            .scaleEffect(configuration.isPressed ? 0.95: 1)
+            .foregroundColor(.primary)
+            .animation(.spring())
+    }
+}
+
+
+enum HourOffsetList: Int, CaseIterable, Identifiable{
+    var id : Int{self.rawValue}
+    case Zero = 0
+    case One = 1
+    case Two = 2
+    case Three = 3
+    case Four = 4
+    case Five = 5
 }
