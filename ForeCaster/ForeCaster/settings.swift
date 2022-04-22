@@ -108,7 +108,7 @@ struct idealTempModleView: View{
                 }
             }
             Spacer().frame(height: 100)
-        }.background(Color.blue)
+        }.frame(width: UIScreen.main.bounds.width).edgesIgnoringSafeArea(.horizontal).background(Color.blue)
     }
 }
 
