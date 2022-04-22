@@ -29,7 +29,7 @@ struct DailyView: View {
         ZStack{
             VStack{
                 Spacer().frame(height: 100)
-                Text("\(dayInfo.detailedForecast)").background(Color.gray.opacity(0.6)).cornerRadius(7).frame(width: UIScreen.main.bounds.width - 60)
+                Text("\(dayInfo.detailedForecast)").background(Color.gray.opacity(0.6)).cornerRadius(7).frame(width: UIScreen.main.bounds.width - 60).font(.system(size: 20))
                 Spacer()
                 
                 ScrollView(){
