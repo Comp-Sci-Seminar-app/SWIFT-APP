@@ -55,7 +55,7 @@ struct idealTempModleView: View{
         
         VStack{
             
-            Spacer()
+            Spacer().frame(height: 50)
             Text("Hours that match conditions will show up green. otherwise it will be gray. If humidity is -1 then it will be ignored.").frame(width: UIScreen.main.bounds.width).background(Color.customGray).font(.system(size: 20))
             Toggle(isOn: $rain, label: {
                 Text("Rain?").frame(width: UIScreen.main.bounds.width - 30).background(Color.customGray)
@@ -107,6 +107,7 @@ struct idealTempModleView: View{
                     }
                 }
             }
+            Spacer().frame(height: 100)
         }.background(Color.blue)
     }
 }

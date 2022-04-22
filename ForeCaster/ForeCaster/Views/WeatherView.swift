@@ -96,12 +96,15 @@ struct WeatherView: View {
                                 Image("\(f.responses.current.condition?.code ?? 1000)")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
+                                    .edgesIgnoringSafeArea(.all)
                                 
                                 //if it is night, uses a different image
                             }else{
                                 Image("night")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
+                                    .edgesIgnoringSafeArea(.all)
+
                             }
                         }
                         
