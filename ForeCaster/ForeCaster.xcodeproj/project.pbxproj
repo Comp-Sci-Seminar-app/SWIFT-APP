@@ -15,6 +15,14 @@
 		1A572AFF27D7A2D300004FD8 /* AdvancedHourlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A572AFE27D7A2D300004FD8 /* AdvancedHourlyView.swift */; };
 		1A572B0127D7A2DE00004FD8 /* backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A572B0027D7A2DD00004FD8 /* backend.swift */; };
 		1A6BA14227E4B9610024F822 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6BA14127E4B9610024F822 /* DailyView.swift */; };
+		1ABD6B0E2812E0A900252634 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABD6AF32812E06700252634 /* WidgetKit.framework */; };
+		1ABD6B0F2812E0A900252634 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABD6AF52812E06700252634 /* SwiftUI.framework */; };
+		1ABD6B122812E0A900252634 /* widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD6B112812E0A900252634 /* widget.swift */; };
+		1ABD6B152812E0AB00252634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ABD6B142812E0AB00252634 /* Assets.xcassets */; };
+		1ABD6B172812E0AB00252634 /* widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD6B132812E0A900252634 /* widget.intentdefinition */; };
+		1ABD6B182812E0AB00252634 /* widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD6B132812E0A900252634 /* widget.intentdefinition */; };
+		1ABD6B1B2812E0AB00252634 /* widgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1ABD6B0D2812E0A900252634 /* widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1ABD6B1F2812E11400252634 /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD5C34727F4912900E488DD /* dataParsing.swift */; };
 		1AD5C34827F4912900E488DD /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD5C34727F4912900E488DD /* dataParsing.swift */; };
 		1AD5C34A27F4915C00E488DD /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD5C34927F4915C00E488DD /* Notifications.swift */; };
 		1AD5C34C27F4915F00E488DD /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD5C34B27F4915F00E488DD /* WeatherView.swift */; };
@@ -33,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1ABD6B192812E0AB00252634 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AE48D6E27C7D09F0077E87A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1ABD6B0C2812E0A900252634;
+			remoteInfo = widgetExtension;
+		};
 		1AE48D8827C7D0A20077E87A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1AE48D6E27C7D09F0077E87A /* Project object */;
@@ -49,6 +64,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1ABD6B062812E06A00252634 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1ABD6B1B2812E0AB00252634 /* widgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1A282B03280D968C000595F1 /* settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
 		1A32257E27EB47A900A5C513 /* hourlyPreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hourlyPreView.swift; sourceTree = "<group>"; };
@@ -58,6 +87,13 @@
 		1A572AFE27D7A2D300004FD8 /* AdvancedHourlyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvancedHourlyView.swift; path = ForeCaster/AdvancedHourlyView.swift; sourceTree = SOURCE_ROOT; };
 		1A572B0027D7A2DD00004FD8 /* backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = backend.swift; path = ForeCaster/backend.swift; sourceTree = SOURCE_ROOT; };
 		1A6BA14127E4B9610024F822 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		1ABD6AF32812E06700252634 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		1ABD6AF52812E06700252634 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		1ABD6B0D2812E0A900252634 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1ABD6B112812E0A900252634 /* widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = widget.swift; sourceTree = "<group>"; };
+		1ABD6B132812E0A900252634 /* widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = widget.intentdefinition; sourceTree = "<group>"; };
+		1ABD6B142812E0AB00252634 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1ABD6B162812E0AB00252634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AD5C34727F4912900E488DD /* dataParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataParsing.swift; sourceTree = "<group>"; };
 		1AD5C34927F4915C00E488DD /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		1AD5C34B27F4915F00E488DD /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
@@ -84,6 +120,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1ABD6B0A2812E0A900252634 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1ABD6B0F2812E0A900252634 /* SwiftUI.framework in Frameworks */,
+				1ABD6B0E2812E0A900252634 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1AE48D7327C7D09F0077E87A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,8 +167,21 @@
 			isa = PBXGroup;
 			children = (
 				F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */,
+				1ABD6AF32812E06700252634 /* WidgetKit.framework */,
+				1ABD6AF52812E06700252634 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1ABD6B102812E0A900252634 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				1ABD6B112812E0A900252634 /* widget.swift */,
+				1ABD6B132812E0A900252634 /* widget.intentdefinition */,
+				1ABD6B142812E0AB00252634 /* Assets.xcassets */,
+				1ABD6B162812E0AB00252634 /* Info.plist */,
+			);
+			path = widget;
 			sourceTree = "<group>";
 		};
 		1AE48D6D27C7D09F0077E87A = {
@@ -132,6 +190,7 @@
 				1AE48D7827C7D09F0077E87A /* ForeCaster */,
 				1AE48D8A27C7D0A20077E87A /* ForeCasterTests */,
 				1AE48D9527C7D0A20077E87A /* ForeCasterUITests */,
+				1ABD6B102812E0A900252634 /* widget */,
 				1AE48D7727C7D09F0077E87A /* Products */,
 				0AE6FBC9F1C40CA026B7ABE0 /* Pods */,
 				1994EB846B46173F5D3D7BA7 /* Frameworks */,
@@ -144,6 +203,7 @@
 				1AE48D7627C7D09F0077E87A /* ForeCaster.app */,
 				1AE48D8727C7D0A20077E87A /* ForeCasterTests.xctest */,
 				1AE48D9227C7D0A20077E87A /* ForeCasterUITests.xctest */,
+				1ABD6B0D2812E0A900252634 /* widgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,6 +273,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1ABD6B0C2812E0A900252634 /* widgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1ABD6B1C2812E0AB00252634 /* Build configuration list for PBXNativeTarget "widgetExtension" */;
+			buildPhases = (
+				1ABD6B092812E0A900252634 /* Sources */,
+				1ABD6B0A2812E0A900252634 /* Frameworks */,
+				1ABD6B0B2812E0A900252634 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = widgetExtension;
+			productName = widgetExtension;
+			productReference = 1ABD6B0D2812E0A900252634 /* widgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		1AE48D7527C7D09F0077E87A /* ForeCaster */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1AE48D9B27C7D0A20077E87A /* Build configuration list for PBXNativeTarget "ForeCaster" */;
@@ -221,10 +298,12 @@
 				1AE48D7227C7D09F0077E87A /* Sources */,
 				1AE48D7327C7D09F0077E87A /* Frameworks */,
 				1AE48D7427C7D09F0077E87A /* Resources */,
+				1ABD6B062812E06A00252634 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1ABD6B1A2812E0AB00252634 /* PBXTargetDependency */,
 			);
 			name = ForeCaster;
 			productName = ForeCaster;
@@ -276,6 +355,9 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					1ABD6B0C2812E0A900252634 = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					1AE48D7527C7D09F0077E87A = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -305,11 +387,20 @@
 				1AE48D7527C7D09F0077E87A /* ForeCaster */,
 				1AE48D8627C7D0A20077E87A /* ForeCasterTests */,
 				1AE48D9127C7D0A20077E87A /* ForeCasterUITests */,
+				1ABD6B0C2812E0A900252634 /* widgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1ABD6B0B2812E0A900252634 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1ABD6B152812E0AB00252634 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1AE48D7427C7D09F0077E87A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -361,6 +452,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1ABD6B092812E0A900252634 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1ABD6B172812E0AB00252634 /* widget.intentdefinition in Sources */,
+				1ABD6B1F2812E11400252634 /* dataParsing.swift in Sources */,
+				1ABD6B122812E0A900252634 /* widget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1AE48D7227C7D09F0077E87A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,6 +481,7 @@
 				F029D9B827D651D000F2AB6E /* LocationRequestView.swift in Sources */,
 				1AD5C34827F4912900E488DD /* dataParsing.swift in Sources */,
 				1A282B04280D968C000595F1 /* settings.swift in Sources */,
+				1ABD6B182812E0AB00252634 /* widget.intentdefinition in Sources */,
 				1AE48D7A27C7D09F0077E87A /* ForeCasterApp.swift in Sources */,
 				1A4FBA5427E8BD1B006F3E2A /* DailyPreView.swift in Sources */,
 				1A572AFF27D7A2D300004FD8 /* AdvancedHourlyView.swift in Sources */,
@@ -405,6 +507,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1ABD6B1A2812E0AB00252634 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1ABD6B0C2812E0A900252634 /* widgetExtension */;
+			targetProxy = 1ABD6B192812E0AB00252634 /* PBXContainerItemProxy */;
+		};
 		1AE48D8927C7D0A20077E87A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1AE48D7527C7D09F0077E87A /* ForeCaster */;
@@ -418,6 +525,48 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1ABD6B1D2812E0AB00252634 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4QTYLSM938;
+				INFOPLIST_FILE = widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Smartester-People-CO.ForeCaster.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1ABD6B1E2812E0AB00252634 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4QTYLSM938;
+				INFOPLIST_FILE = widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Smartester-People-CO.ForeCaster.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		1AE48D9927C7D0A20077E87A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -538,6 +687,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 760F9E2C63324A89A81D405A /* Pods-ForeCaster.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -561,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22F308470701F6F8D5DF5F09 /* Pods-ForeCaster.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -667,6 +818,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1ABD6B1C2812E0AB00252634 /* Build configuration list for PBXNativeTarget "widgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1ABD6B1D2812E0AB00252634 /* Debug */,
+				1ABD6B1E2812E0AB00252634 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1AE48D7127C7D09F0077E87A /* Build configuration list for PBXProject "ForeCaster" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
