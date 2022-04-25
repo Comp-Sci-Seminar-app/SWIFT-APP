@@ -167,7 +167,7 @@ func nightOrDay(dp: DPeriods) -> Int{
 
 //Returns a list of hours that should have rain hopefully during them, thanks big gov for hiding your secret shortforcast list
 //Real spooky of you gov't
-//probably busy telling us birds aren't real
+//probably busy telling us birds are real
 func returnHourList(hp: [HPeriods]) -> [Int]{
     @AppStorage("keyword") var keyWord : String = "Rain"
     var listOfH : [Int] = []
