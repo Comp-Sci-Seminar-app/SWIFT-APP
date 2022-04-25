@@ -11,7 +11,6 @@ import CoreLocation
 
 
 //allows me to set the back button to invisible so I can add a custom image behind it. Also copy and pasted from stack overflow
-
 class Theme {
     static func navigationBarColors(background : UIColor?,
                                     titleColor : UIColor? = nil, tintColor : UIColor? = nil ){
@@ -179,7 +178,7 @@ func returnHourList(hp: [HPeriods]) -> [Int]{
         n+=1
         print(sF)
         print(n)
-        if((sF.contains(keyWord))){
+        if((sF.contains(keyWord)) && hour.number - offset > 0){
             listOfH.append(hour.number - offset)
         }
     }
@@ -227,7 +226,4 @@ enum HourOffsetList: Int, CaseIterable, Identifiable{
     case Three = 3
     case Four = 4
     case Five = 5
-    
-    
 }
-

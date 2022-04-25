@@ -58,7 +58,7 @@ struct SettingsView: View {
                             let content = UNMutableNotificationContent()
                             content.title = "Weather Notification"
                             content.subtitle = keyWord
-                            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 100.0)
+                            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(keyWord).mp3"))
                             var modifiableI = i
                             if ((i - hourOffest.rawValue) > 0){
                                 modifiableI -= hourOffest.rawValue
