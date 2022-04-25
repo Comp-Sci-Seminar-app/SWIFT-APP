@@ -35,7 +35,7 @@ struct idealTempModleView: View{
         VStack{
             //gets the user's demands and deals with it
             Spacer().frame(height: 50)
-            Text("Hours that match conditions will show up green. otherwise it will be gray. If humidity is -1 then it will be ignored.").frame(width: UIScreen.main.bounds.width).background(Color.customGray).font(.system(size: 20))
+            Text("Hours that match conditions will show up green. otherwise it will be gray. If humidity is -1 then it will be ignored.").frame(width: UIScreen.main.bounds.width).background(Color.customGray).font(.system(size: 20)).fixedSize(horizontal: false, vertical: true)
             Toggle(isOn: $rain, label: {
                 Text("Rain?").frame(width: UIScreen.main.bounds.width - 30).background(Color.customGray)
             })

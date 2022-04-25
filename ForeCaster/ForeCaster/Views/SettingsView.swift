@@ -83,10 +83,11 @@ struct SettingsView: View {
                         .disableAutocorrection(true)
                         .textFieldStyle(RoundedBorderTextFieldStyle()).opacity(0.8)
                     //explanation for the stupid
-                    Text("You know those short forcasts for hours? If you enter a word in here and create notifications, this will search through every hour loaded and create a notification for each one.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
+                    Text("You know those short forcasts for hours? If you enter a word in here and create notifications, this will search through every hour loaded and create a notification for each one.").background(Color.customBlue.opacity(0.6)).cornerRadius(10).fixedSize(horizontal: false, vertical: true)
+
                     Spacer().frame(height: 10)
-                    Text("Note: this will create notifications for today going into a week from now. you can delete them at any time.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
-                    
+                    Text("Note: this will create notifications for today going into a week from now. you can delete them at any time.").background(Color.customBlue.opacity(0.6)).cornerRadius(10).fixedSize(horizontal: false, vertical: true)
+                                     
                 }
                 Spacer().frame(height: 60)
                 Image("down").resizable().frame(width: 100, height: 100).overlay(
