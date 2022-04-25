@@ -89,7 +89,10 @@ struct SettingsView: View {
                     
                 }
                 Spacer().frame(height: 60)
-                Text("More Below").font(.system(size: 50)).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
+                Image("down").resizable().frame(width: 100, height: 100).overlay(
+                    RoundedRectangle(cornerRadius: 15.0)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(Color.yellow))
                 Spacer().frame(height: 60)
                 //hour offset
                 Text("This sets how much earlier you want the notification. Note: if your offset makes the notification happen negative hours from now, it will be disregarded").background(Color.customBlue.opacity(0.6)).cornerRadius(10)

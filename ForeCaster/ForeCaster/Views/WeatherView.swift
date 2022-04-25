@@ -45,7 +45,7 @@ struct WeatherView: View {
                         Spacer().frame(height: 40)
                         HStack{
                             VStack{
-                                Text("Current temperature: \(f.responses.current.temp_f.rounded())")
+                                Text("Current temperature: \(Int(f.responses.current.temp_f.rounded()))")
                                 Text("Current Weather: \(f.responses.current.condition?.text ?? "no data yet")")
                             }.font(.system(size: 20))
                             Image("wireframe").resizable().frame(width: 50, height: 50)
