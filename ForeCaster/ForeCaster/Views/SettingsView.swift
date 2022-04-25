@@ -26,16 +26,19 @@ struct SettingsView: View {
                     Toggle(isOn: $twentyFourHourClock, label: {Text("24 Hour time?")})
                     
                     Spacer()
+                    //do I really need comments for this?
                     Button("Change Location") {
                         showingSheet.toggle()
                     }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.gray))
                     Spacer()
+                    //pulls up the ideal hour menue
                     Button("Find ideal Hours") {
                         showingIdeal.toggle()
                     }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.gray))
                     Spacer()
                 }
                 VStack{
+                    //gets permission, strangely not required for ipad
                     Button("Request Notification Permission") {
                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                             if success {
@@ -46,11 +49,11 @@ struct SettingsView: View {
                         }
                     }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.gray))
                     Spacer()
+                    
+                    //schedules the notifications
                     Button("Schedule Notification") {
-                        //twentyFourHourClock = true
-                        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                        // UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                         
+                        //iterates through the list of correct hours and gives the notifications
                         for i in returnHourList(hp: allHourly){
                             let content = UNMutableNotificationContent()
                             content.title = "Weather Notification"
@@ -68,15 +71,18 @@ struct SettingsView: View {
                         
                     }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.customBlue))
                     Spacer()
+                    
+                    //you know what this does
                     Button("Remove Notifications") {
                         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     }.buttonStyle(NeumorphicButtonStyle(bgColor: Color.customBlue))
                     Spacer()
+                    //what word the user should use
                     TextField("Keyword to check for notifications: ", text: $keyWord)
                         .disableAutocorrection(true)
                         .textFieldStyle(RoundedBorderTextFieldStyle()).opacity(0.8)
-                    
+                    //explanation for the stupid
                     Text("You know those short forcasts for hours? If you enter a word in here and create notifications, this will search through every hour loaded and create a notification for each one.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                     Spacer().frame(height: 10)
                     Text("Note: this will create notifications for today going into a week from now. you can delete them at any time.").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
@@ -85,6 +91,7 @@ struct SettingsView: View {
                 Spacer().frame(height: 60)
                 Text("More Below").font(.system(size: 50)).background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                 Spacer().frame(height: 60)
+                //hour offset
                 Text("This sets how much earlier you want the notification. Note: if your offset makes the notification happen negative hours from now, it will be disregarded").background(Color.customBlue.opacity(0.6)).cornerRadius(10)
                 Picker("", selection: $hourOffest){
                     Text("None").tag(HourOffsetList.Zero)
@@ -115,7 +122,7 @@ struct SettingsView: View {
                 }
             }
             
-        )
+        )//holy sheet!
         .sheet(isPresented: $showingSheet){
             LocationRequestView(showSheet: $showingSheet)
         }

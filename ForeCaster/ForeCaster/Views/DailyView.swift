@@ -65,8 +65,7 @@ struct DailyView: View {
                                 ForEach(0..<getHowManyHoursAreLeftInToday()){i in
                                     
                                     NavigationLink(destination: AdvancedHourlyView(data: hInfo[i]), label: {hourlyPreView(i:i, hInfo: hInfo)})
-                                    //hourlyPreView(i:i, hInfo: hInfo)
-                                    //.opacity(0)
+                                    
                                     Spacer()
                                 }
                                 
@@ -77,7 +76,6 @@ struct DailyView: View {
                             HStack{
                                 ForEach((getHowManyHoursAreLeftInToday() + 120)..<hInfo.count){i in
                                     NavigationLink(destination: AdvancedHourlyView(data: hInfo[i]), label: {hourlyPreView(i:i, hInfo: hInfo)})
-                                    //.opacity(0)
                                     Spacer()
                                 }
                             }
@@ -88,7 +86,6 @@ struct DailyView: View {
                             HStack{
                                 ForEach(start..<finish){i in
                                     NavigationLink(destination: AdvancedHourlyView(data: hInfo[i]), label: {hourlyPreView(i:i, hInfo: hInfo)})
-                                    //.opacity(0)
                                     Spacer()
                                 }
                             }
@@ -105,8 +102,6 @@ struct DailyView: View {
         }
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).ignoresSafeArea(.all)
         .background(Image("background")
-                       // .resizable()
-                       // .frame(height: UIScreen.main.bounds.height)
                         .ignoresSafeArea(.all)
                         
         )

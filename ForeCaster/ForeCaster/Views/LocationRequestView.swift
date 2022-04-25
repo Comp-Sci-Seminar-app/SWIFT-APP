@@ -63,10 +63,7 @@ struct LocationRequestView: View {
                 }.sheet(isPresented: $showOtherSheet) {
                     NewLocationView(showSheet: $showSheet)
                 }
-                //}
-                //else{
-                //      ContentView()
-                //  }
+                
                 
             }
         }

@@ -95,19 +95,11 @@ struct AdvancedHourlyView: View {
                     Spacer()
                     Spacer()
                 }.frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - 60)
-                // VStack{
-                //    Spacer().frame(height: 27.5)
-                //    HStack{
-                //         Rectangle().frame(width: 80, height: 30).opacity(0.8).cornerRadius(20)
-                //         Spacer()
-                //      }
-                //      Spacer()
-                //  }
+             
             }
         }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height).ignoresSafeArea(.all)
         .background(Image("background")
-                        // .resizable()
-                        // .frame(height: UIScreen.main.bounds.height)
+                        
                         .ignoresSafeArea(.all)
         )
         .navigationBarItems(leading: btnBack)

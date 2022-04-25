@@ -18,7 +18,6 @@ struct DailyPreView: View {
             Text(allDaily[index].name).foregroundColor(.white)
             Text(" \(Image(systemName: "thermometer")) \(allDaily[index].temperature) \(allDaily[index].temperatureUnit) ").foregroundColor(.white)
             Text(" \(Image(systemName: "wind")) \(allDaily[index].windSpeed) \(allDaily[index].windDirection) ").foregroundColor(.white)
-            //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
         }.background(Color.customBlue.opacity(0.5))
         .cornerRadius(10)
         .frame(alignment: .center)

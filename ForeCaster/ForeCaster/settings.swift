@@ -8,28 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct darkMode: Codable{
-    var on = false
-}
 
-class idealTime: ObservableObject{
-    var tempNum : Double = 0
-    var rain = 0
-    var snow = 0
-    var data : [Hour]
-    var humidity = 0
-    init(data: [Hour] = [Hour](), tempNum : Double, rain : Int, snow : Int, humidity : Int){
-        self.data = data
-        self.tempNum = tempNum
-        self.rain = rain
-        self.snow = snow
-        self.humidity = humidity
-    }
-    
-    
-    
-    
-}
 
 struct idealTempModleView: View{
     @Environment(\.presentationMode) private var presentationMode
@@ -54,7 +33,7 @@ struct idealTempModleView: View{
     var body: some View{
         
         VStack{
-            
+            //gets the user's demands and deals with it
             Spacer().frame(height: 50)
             Text("Hours that match conditions will show up green. otherwise it will be gray. If humidity is -1 then it will be ignored.").frame(width: UIScreen.main.bounds.width).background(Color.customGray).font(.system(size: 20))
             Toggle(isOn: $rain, label: {
@@ -91,7 +70,7 @@ struct idealTempModleView: View{
                     ForEach(0..<24){ i in
                         ZStack{
                             Group{
-                                
+                                //lights up the hour if it meets the requirements
                                 if findIdealTime(h: f.responses.forecast.forecastday[0].hour[i], tempNum: temp, rain: rain, snow: snow, humidity: humidity){
                                     Rectangle().frame(width: 100, height: 100).foregroundColor(Color.green).cornerRadius(30)
                                 }else{
@@ -112,7 +91,7 @@ struct idealTempModleView: View{
     }
 }
 
-
+//figures out if an hour is within the bounds that the user requires
 func findIdealTime(h: Hour, tempNum: Double, rain: Bool, snow: Bool, humidity: Int) -> Bool{
     var rainNum = 0
     var snowNum = 0

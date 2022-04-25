@@ -45,7 +45,7 @@ struct WeatherView: View {
                         Spacer().frame(height: 40)
                         HStack{
                             VStack{
-                                Text("Current temperature: \(f.responses.current.temp_f)")
+                                Text("Current temperature: \(f.responses.current.temp_f.rounded())")
                                 Text("Current Weather: \(f.responses.current.condition?.text ?? "no data yet")")
                             }.font(.system(size: 20))
                             Image("wireframe").resizable().frame(width: 50, height: 50)
@@ -64,14 +64,13 @@ struct WeatherView: View {
                                         Text(allDaily[(index * 2) - dayOffset].name).foregroundColor(.white)
                                         Text(" \(Image(systemName: "thermometer")) \(allDaily[(index * 2) - dayOffset].temperature) \(allDaily[(index * 2) - dayOffset].temperatureUnit) ").foregroundColor(.white)
                                         Text(" \(Image(systemName: "wind")) \(allDaily[(index * 2) - dayOffset].windSpeed) \(allDaily[(index * 2) - dayOffset].windDirection) ").foregroundColor(.white)
-                                        //Text("Forecast: \(allDaily[index].detailedForecast)").multilineTextAlignment(.center).frame(width: 40)
+                                       
                                     }.frame(width: UIScreen.main.bounds.width - 10, height: 130).background(Color.customBlue.opacity(0.5))
                                     .cornerRadius(10)
                                     .frame(alignment: .center).font(.system(size: 30))
                                     
                                     
                                 })
-                                //.navigationBarItems(leading: backButton())
                                 .navigationBarHidden(true)
                                 .navigationBarBackButtonHidden(true)
                                 //makes it look nice
