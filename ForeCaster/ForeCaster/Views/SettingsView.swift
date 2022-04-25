@@ -14,7 +14,6 @@ struct SettingsView: View {
     @AppStorage("keyword") var keyWord : String = "Rain"
     @State var hourOffest : HourOffsetList = HourOffsetList.Zero
     @State private var showingSheet = true
-    @State var customSounds = true
     var body: some View {
         let allHourly = g.hForecast.properties.periods
         VStack {
@@ -46,12 +45,7 @@ struct SettingsView: View {
                             let content = UNMutableNotificationContent()
                             content.title = "Weather Notification"
                             content.subtitle = keyWord
-                            if (customSounds){
-                                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(keyWord).mp3"))
-                            }
-                            else{
-                                content.sound = UNNotificationSound.default
-                            }
+                            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(keyWord).mp3"))
                             var modifiableI = i
                             if ((i - hourOffest.rawValue) > 0){
                                 modifiableI -= hourOffest.rawValue
