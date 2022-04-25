@@ -14,17 +14,17 @@ struct SettingsView: View {
     @AppStorage("keyword") var keyWord : String = "Rain"
     @State var hourOffest : HourOffsetList = HourOffsetList.Zero
     @State private var showingSheet = true
+    @State var customSounds = true
     var body: some View {
         let allHourly = g.hForecast.properties.periods
         VStack {
             ScrollView{
                 
-                
-                
                 Spacer().frame(height: 30)
                 Toggle(isOn: $twentyFourHourClock, label: {Text("24 Hour time?")})
                 
                 Spacer()
+                
                 
                 VStack{
                     Button("Request Notification Permission") {
@@ -46,7 +46,12 @@ struct SettingsView: View {
                             let content = UNMutableNotificationContent()
                             content.title = "Weather Notification"
                             content.subtitle = keyWord
-                            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(keyWord).mp3"))
+                            if (customSounds){
+                                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(keyWord).mp3"))
+                            }
+                            else{
+                                content.sound = UNNotificationSound.default
+                            }
                             var modifiableI = i
                             if ((i - hourOffest.rawValue) > 0){
                                 modifiableI -= hourOffest.rawValue
