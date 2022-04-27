@@ -11,14 +11,12 @@ import SwiftUI
 
 
 struct idealTempModleView: View{
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.presentationMode) var presentationMode
     @State var rain = false
     @State var snow = false
     @State var humidity = 0
     @State var temp = 0.0
     @StateObject var f = FetchData()
-    
-    
     var intProxy: Binding<Double>{
         Binding<Double>(get: {
             //returns the score as a Double
@@ -31,7 +29,7 @@ struct idealTempModleView: View{
     }
     
     var body: some View{
-        
+        ZStack{
         VStack{
             //gets the user's demands and deals with it
             Spacer().frame(height: 50)
@@ -87,6 +85,26 @@ struct idealTempModleView: View{
                 }
             }
             Spacer().frame(height: 100)
+        }
+            VStack{
+                Spacer().frame(height: 20)
+                HStack{
+                    Spacer().frame(width: 10)
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        ZStack{
+                            Rectangle().frame(width: 80, height: 30).foregroundColor(Color.white.opacity(0.7)).cornerRadius(15)
+                        HStack{
+                            Image(systemName: "chevron.backward")
+                            Text("Back")
+                        }.foregroundColor(.red)
+                        }
+                    }
+                    Spacer()
+                }
+                Spacer()
+            }
         }.frame(width: UIScreen.main.bounds.width).edgesIgnoringSafeArea(.horizontal).background(Color.blue)
     }
 }

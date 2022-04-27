@@ -130,8 +130,8 @@ struct SettingsView: View {
         .sheet(isPresented: $showingSheet){
             LocationRequestView(showSheet: $showingSheet)
         }
-        .sheet(isPresented: $showingIdeal){
-            idealTempModleView().opacity(0.8).frame(width:UIScreen.main.bounds.width)
+        .fullScreenCover(isPresented: $showingIdeal){
+            idealTempModleView().opacity(0.8).frame(width:UIScreen.main.bounds.width).ignoresSafeArea(.all)
         }
     }
 }

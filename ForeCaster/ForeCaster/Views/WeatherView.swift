@@ -174,7 +174,7 @@ struct WeatherView: View {
             
         }.sheet(isPresented: $showingSheet){
             LocationRequestView(showSheet: $showingSheet)
-        }.navigationBarTitle("").navigationBarHidden(true).navigationViewStyle(StackNavigationViewStyle())
+        }.navigationBarTitle("").navigationBarHidden(true).navigationViewStyle(StackNavigationViewStyle()).statusBar(hidden: true)
         
         
     }

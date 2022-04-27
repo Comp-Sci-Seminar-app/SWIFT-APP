@@ -244,3 +244,8 @@ struct GaugeProgressStyle: ProgressViewStyle {
         }
     }
 }
+extension UIViewController {
+    func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+}
