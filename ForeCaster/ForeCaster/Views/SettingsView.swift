@@ -131,7 +131,7 @@ struct SettingsView: View {
             LocationRequestView(showSheet: $showingSheet)
         }
         .sheet(isPresented: $showingIdeal){
-            idealTempModleView().opacity(0.8)
+            idealTempModleView().opacity(0.8).frame(width:UIScreen.main.bounds.width)
         }
     }
 }

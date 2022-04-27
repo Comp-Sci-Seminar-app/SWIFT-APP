@@ -227,3 +227,20 @@ enum HourOffsetList: Int, CaseIterable, Identifiable{
     case Four = 4
     case Five = 5
 }
+
+struct GaugeProgressStyle: ProgressViewStyle {
+    var strokeColor = Color.init(Color.RGBColorSpace.sRGBLinear, red: 225/225, green: 225/225, blue: 23/225)//sets color of the circile
+    var strokeWidth = 15.0//sets width of the lines of the circle
+    
+    func makeBody(configuration: Configuration) -> some View {
+        let fractionCompleted = configuration.fractionCompleted ?? 0
+        
+        return ZStack {//returns the circle
+            Circle()
+                .trim(from: 0, to: CGFloat(fractionCompleted))//fills it out to the percentage that is filled
+                .stroke(strokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))//edits the look of the line of the circle
+                .rotationEffect(.degrees(-90))//rotates the circle to start at the right point
+                .frame(width: 300, height: 300, alignment: .center)//makes the circle the right size to fit around the logo
+        }
+    }
+}
