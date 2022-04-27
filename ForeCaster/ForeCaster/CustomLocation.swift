@@ -11,6 +11,8 @@ class customLocation: Codable, ObservableObject{
     var nickname : String!
     var address : String!
     var latLongLink : String!
+    var isUsed : Bool = false
+    var number : Int!
     func getLink() -> String{
         if address == nil && latLongLink != nil{
             return latLongLink
@@ -22,11 +24,11 @@ class customLocation: Codable, ObservableObject{
             return "No stored link"
         }
     }
-    init(address : String, nickname: String = "" ){
+    init(address : String, oneLineAddress: String, nickname: String = "", number: Int ){
         self.address = address
         self.nickname = nickname
     }
-    init(_ latLongLink : String, nickname: String = ""){
+    init(_ latLongLink : String, nickname: String = "", number: Int){
         self.latLongLink = latLongLink
         self.nickname = nickname
     }

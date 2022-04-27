@@ -4,28 +4,39 @@
 //
 //  Created by Samuel Conry-Murray (student LM) on 1/21/22.
 //
-
+import SwiftUI
 import Foundation
-var addressURL = URlForm()//inital URL containing the user's address
+
 class Decoded : ObservableObject{
     @Published var geocode = Recived()//variable containing the geocoding json's results
     @Published var weather = WResponse()//variable containing the weather json's results
     @Published var dForecast = DForecast()//variable containing the daily forcast json's results
     @Published var hForecast = HForecast()//variable containing the hourly forcast json's results
     var locationManager = LocationManager.shared
+    @AppStorage("customLocations") private var customLocations: Data = Data()
+    @AppStorage("WhatLocationAreYouUsing") var name : Int!
     init() {
-        if locationManager.userLocation == nil{
-        decodeGeo()//starts the decoding process on initilization
+        if name != nil{
+            if name == 0 && locationManager.userLocation != nil{
+                decodeWeather(link: "https://api.weather.gov/points/\(locationManager.userLocation?.coordinate.latitude ?? 40),\(locationManager.userLocation?.coordinate.longitude ?? -74)")
+            }
+            else if let local = (try? JSONDecoder().decode([customLocation].self, from: customLocations)){
+                if name > 0{
+                    decodeWeather(link: local[name].getLink())
+                }
+                else{
+                    NewLocationView(redirectBack: false)
+                }
+            }
         }
         else{
-            
-            decodeWeather(link: "https://api.weather.gov/points/\(locationManager.userLocation?.coordinate.latitude ?? 40),\(locationManager.userLocation?.coordinate.longitude ?? -74)")
+            NewLocationView(redirectBack: false)
         }
     }
     
-    func decodeGeo(){//decodes the geocoding json given inital URL
+    func decodeGeo(_ link : String){//decodes the geocoding json given inital URL
         
-        guard let gurl = URL(string: addressURL) else {print("Bad link: \(addressURL)");return}//declares the URL for the json
+        guard let gurl = URL(string: link) else {print("Bad link: \(link)");return}//declares the URL for the json
         
         
         URLSession.shared.dataTask(with: gurl) { (data, response, errors) in
@@ -64,9 +75,9 @@ class Decoded : ObservableObject{
             if let response = try? decoderOne.decode(WResponse.self, from: Data) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {//delays calling the next functions so it can finish decoding
                     self.weather = response
-                //print("Link in FetchWeather: "+response.properties.forecast)//for debug
-                self.decodeForcast(link: self.weather.properties.forecast.replacingOccurrences(of: " ", with: ""))//calls the function to decode daily forcast, removing spaces was an attempt to debug
-                self.decodeForcast(link: self.weather.properties.forecastHourly.replacingOccurrences(of: " ", with: ""))//calls the function to decode hourly forcast, removing spaces was an attempt to debug
+                    //print("Link in FetchWeather: "+response.properties.forecast)//for debug
+                    self.decodeForcast(link: self.weather.properties.forecast.replacingOccurrences(of: " ", with: ""))//calls the function to decode daily forcast, removing spaces was an attempt to debug
+                    self.decodeForcast(link: self.weather.properties.forecastHourly.replacingOccurrences(of: " ", with: ""))//calls the function to decode hourly forcast, removing spaces was an attempt to debug
                 }
             }
         }.resume()
@@ -74,22 +85,22 @@ class Decoded : ObservableObject{
     func decodeForcast(link : String){//decoder for forcasts
         //print("Forecast link: "+link)//for debug
         if link.last == "y"{//checks the end of the link for a y, hourly link ends with y and the daily does not, allows it to differentiate
-        let furl = URL(string: link)!//declares url
-        URLSession.shared.dataTask(with: furl) { (data, response, errors) in
-            
-            guard let Data = data else {print("Error");return}//declares data
-            
-            
-            
-            let decoderOne = JSONDecoder()//declares decoder
-            if let forecast = try? decoderOne.decode(HForecast.self, from: Data) {//decodes to HForcast, "H" for hourly
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {//delay to make sure it finishes
-                    self.hForecast = forecast
-                }
+            let furl = URL(string: link)!//declares url
+            URLSession.shared.dataTask(with: furl) { (data, response, errors) in
                 
-            }
-        }.resume()
-    }
+                guard let Data = data else {print("Error");return}//declares data
+                
+                
+                
+                let decoderOne = JSONDecoder()//declares decoder
+                if let forecast = try? decoderOne.decode(HForecast.self, from: Data) {//decodes to HForcast, "H" for hourly
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {//delay to make sure it finishes
+                        self.hForecast = forecast
+                    }
+                    
+                }
+            }.resume()
+        }
         else{//doesnt end with y thus it is daily
             let furl = URL(string: link)!//declares URL
             URLSession.shared.dataTask(with: furl) { (data, response, errors) in
@@ -224,11 +235,11 @@ struct FDProperties: Codable{
 }
 struct DPeriods : Codable{
     var number : Int = 0
-    var name : String = ""
+    var name : String = "load"
     var startTime : String = ""
     var endTime : String = ""
     var isDaytime : Bool?
-    var temperature : Int = 0
+    var temperature : Int = 1000
     var temperatureUnit : String = ""
     var windSpeed : String = ""
     var windDirection : String = ""
@@ -261,7 +272,7 @@ struct HPeriods : Codable{
 }
 //end of daily forecast structs
 
-func URlForm(_ address : String = "618 Schiller Ave", city : String = "Merion Station", state : String = "PA", zip : String = "19066") -> String{//function reads in an address and outputs a string url
+func URlForm(_ address : String = "", city : String = "", state : String = "", zip : String = "") -> String{//function reads in an address and outputs a string url
     var finalURL  = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address="//static portion of the URL that holds the paramaters we dont need to change
     let URLEnd = "&benchmark=2020&format=json"//same as above but we stick it on the back
     finalURL = finalURL+address.replacingOccurrences(of: " ", with: "+")+"%2C+"+city.replacingOccurrences(of: " ", with: "+")+"%2C+"+state+"+"+zip+URLEnd//creates the URL replacing spaces with plus signs and adding other things in between that are nessecary for the link to function

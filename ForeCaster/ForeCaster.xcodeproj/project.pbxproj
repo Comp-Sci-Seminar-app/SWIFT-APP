@@ -19,6 +19,7 @@
 		F029D9BA27D7856000F2AB6E /* NewLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029D9B927D7856000F2AB6E /* NewLocationView.swift */; };
 		F029D9BC27D78FEA00F2AB6E /* CustomLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029D9BB27D78FEA00F2AB6E /* CustomLocation.swift */; };
 		F0A026EC27C7D26700D6616B /* dataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A026EB27C7D26700D6616B /* dataParsing.swift */; };
+		F0BC107E27EE06EC00801DAD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BC107D27EE06EC00801DAD /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		F029D9B927D7856000F2AB6E /* NewLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationView.swift; sourceTree = "<group>"; };
 		F029D9BB27D78FEA00F2AB6E /* CustomLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocation.swift; sourceTree = "<group>"; };
 		F0A026EB27C7D26700D6616B /* dataParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataParsing.swift; sourceTree = "<group>"; };
+		F0BC107D27EE06EC00801DAD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F0F06C4D3A0734090BF7EA45 /* libPods-ForeCaster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ForeCaster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,6 +175,7 @@
 				1AE48D7B27C7D09F0077E87A /* ContentView.swift */,
 				F029D9B727D651D000F2AB6E /* LocationRequestView.swift */,
 				F029D9B927D7856000F2AB6E /* NewLocationView.swift */,
+				F0BC107D27EE06EC00801DAD /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F029D9B627D64C9400F2AB6E /* LocationManager.swift in Sources */,
+				F0BC107E27EE06EC00801DAD /* SettingsView.swift in Sources */,
 				1AE48D7C27C7D09F0077E87A /* ContentView.swift in Sources */,
 				F029D9BA27D7856000F2AB6E /* NewLocationView.swift in Sources */,
 				F0A026EC27C7D26700D6616B /* dataParsing.swift in Sources */,

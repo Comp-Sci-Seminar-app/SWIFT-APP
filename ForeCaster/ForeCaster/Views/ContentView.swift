@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-var twentyFourHourClock : Bool = false//Placeholder till its implemented in settings as appstorage
+//Placeholder till its implemented in settings as appstorage
 
 import UIKit
 import CoreLocation
@@ -16,8 +16,9 @@ import CoreLocation
 
 
 
-func makeTimeNice(_ evilTime: String)-> String{//Changes the time from what it looks like in the API(below) to normal format
+func makeTimeNice(_ evilTime: String, clockType: Bool)-> String{//Changes the time from what it looks like in the API(below) to normal format
     //2022-02-24T10:00:00-05:00(example)
+    let twentyFourHourClock = clockType
     let start = evilTime.dropFirst(11)//Removes the first 11 chars: 10:00:00-05:00
     let end = start.dropLast(9)//Removes the last 9 chars: 10:00
     var niceTime = String(end)//converts substring to string
@@ -89,6 +90,7 @@ extension View {
 //Everything below is my work
 
 struct ContentView: View {
+    @AppStorage("24HourClock") var twentyFourHourClock : Bool = false
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var g = Decoded()// new API
     @StateObject var f = FetchData()// old API
@@ -97,26 +99,35 @@ struct ContentView: View {
     @State var displayDayAfter = false//this too
     @State var offset: CGPoint = .zero// this is the offset of the scroll view
     @State var coeffOfWidth = (UIScreen.main.bounds.width/2)-73
-    
+    @State var progressMove = 0
+    @State var loadingDissapear = 0.0
+    let loadingSize = 100
+    @AppStorage("customLocations") private var customLocations: Data = Data()
+    @AppStorage("allowLocation") var allowLocation : Bool = true
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    let screenWidth = UIScreen.main.bounds.size.width
+    let screenHeight = UIScreen.main.bounds.size.height
+    @State var totalWait : Double = 0
     
     var body: some View {
+        let local = try? JSONDecoder().decode([customLocation].self, from: customLocations)
         let screenWidth = UIScreen.main.bounds.width
         //let screenHeight = UIScreen.main.bounds.height
-        
-        
+            
         //let screenOffset =
         let allDaily = g.dForecast.properties.periods//all of the important info passed by the API for daily
         let allHourly = g.hForecast.properties.periods//all of the important info passed by the API for hourly
         let heightOffset = 90+offset.y//the normal offset is 90 off because of how spacers work in scrollviews, this makes it easier to use the value
         Group{
-            if locationManager.userLocation == nil{
-                LocationRequestView()
+            if (locationManager.userLocation == nil && local?.count == 1){
+                NewLocationView(redirectBack: false)
             }
             else{
-                ZStack {//so i can put a rectangle as the background and stuff like that
+                
+                ZStack {//so i can put a rectangle as the background and have the loading screen on top
                     Rectangle().fill(Color(.systemBlue))
                         .edgesIgnoringSafeArea(.all)
-                        .brightness(0.45-positiveOnly(Double(heightOffset)/100))
+                        .brightness(0.3-positiveOnly(Double(heightOffset)/100))
                     VStack{//Contains the text that is being changed
                         Spacer().frame(height: 5)
                         HStack{
@@ -176,7 +187,7 @@ struct ContentView: View {
                                     ForEach(0..<allHourly.count){index in
                                         VStack{
                                             
-                                            Text(" \(makeTimeNice(allHourly[index].startTime)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
+                                            Text(" \(makeTimeNice(allHourly[index].startTime, clockType: twentyFourHourClock)) ").foregroundColor(.white)//this gets the time, thats the only real difference other than the actual values
                                             Text(" \(Image(systemName: "thermometer")) \(allHourly[index].temperature) \(allHourly[index].temperatureUnit) ").foregroundColor(.white)
                                             if !(allHourly[index].windSpeed.hasPrefix("0")){
                                                 Text(" \(Image(systemName: "wind")) \(allHourly[index].windSpeed) \(allHourly[index].windDirection) ").foregroundColor(.white)
@@ -202,15 +213,79 @@ struct ContentView: View {
                         .coordinateSpace(name: "scroll")//not sure about this either
                     }
                     
-                }//.edgesIgnoringSafeArea(.all)//fills out the screen
-                 }
+                    
+                    ZStack{
+                        Rectangle().fill(Color(.systemBlue))//the background, covers the UI behind
+                            .edgesIgnoringSafeArea(.all)
+                            .brightness(0.3)
+                        Image(uiImage: #imageLiteral(resourceName: "FCLogo.png")).resizable()//our logo, so the loading screen looks cool
+                            .frame(width: 200, height: 200, alignment: .center)//sizes the logo to fit the best possible
+                            .position(x: screenWidth/2, y: screenHeight/2)//positions the logo in the center of the screen
+                        VStack{
+                            
+                            Text("Welcome to Forecaster")
+                            
+                            
+                            ProgressView("Loading...", value: Float(progressMove), total: 100).progressViewStyle(GaugeProgressStyle())//creates the progress view
+                                .onReceive(timer) { _ in//goes through below code when the time publishes (every 0.1 seconds)
+                                    
+                                    if progressMove < 100{//checks so progressMove doesnt infinitly grow
+                                        if g.weather.properties.forecast == "load" && progressMove < 50{//checks if the 1st json has given data
+                                            progressMove += 1//increases the progress by 1%
+                                            
+                                        }
+                                        else if g.dForecast.properties.periods[0].name != "load" && progressMove < 50{//checks if the data has been recived
+                                            progressMove = 50//jumps progress bar to 50% to prevent unnecessary loading time
+                                        }
+                                        if f.responses.location.localtime == "2022-01-04 7:58" && progressMove <= 100{//checks if the 2nd json has given data
+                                            progressMove += 1//increases the progress by 1%
+                                        }
+                                        else if f.responses.location.localtime != "2022-01-04 7:58" && progressMove <= 100{//checks if the data has been recived
+                                            progressMove = 100//finishes the loading to prevent waiting
+                                        }
+                                    }
+                                }
+                                .position(x: screenWidth/2, y: screenHeight/2-30)//positions it around the logo
+                            if totalWait > 20{
+                                Text("Loading error, please restart app \(g.dForecast.properties.periods[0].name)")//if it takes over 20 seconds to load tells the user to restart the app
+                            }
+                        }
+                    }.opacity(1-loadingDissapear)//changes the opacity to fade load screen out
+                    .onReceive(timer, perform: { _ in//every time the timer publishes it goes through this
+                        if progressMove >= 100 && g.dForecast.properties.periods[0].temperature != 1000{//checks if the bar is full and the json had given some data
+                            loadingDissapear += 0.2//increases this so it slowly dissapears
+                        }
+                        else{
+                            totalWait += 0.1//if it hasnt loaded or gotten information it adds to the wait time
+                        }
+                    })
+                    
+                    
+                }
+                
+            }
         }
     }
-    }
+}
+struct CustomList : Codable{
+    var locationList : [customLocation]
+}
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+
+struct GaugeProgressStyle: ProgressViewStyle {
+    var strokeColor = Color.init(Color.RGBColorSpace.sRGBLinear, red: 225/225, green: 225/225, blue: 23/225)//sets color of the circile
+    var strokeWidth = 15.0//sets width of the lines of the circle
+    
+    func makeBody(configuration: Configuration) -> some View {
+        let fractionCompleted = configuration.fractionCompleted ?? 0
+        
+        return ZStack {//returns the circle
+            Circle()
+                .trim(from: 0, to: CGFloat(fractionCompleted))//fills it out to the percentage that is filled
+                .stroke(strokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))//edits the look of the line of the circle
+                .rotationEffect(.degrees(-90))//rotates the circle to start at the right point
+                .frame(width: 300, height: 300, alignment: .center)//makes the circle the right size to fit around the logo
+        }
     }
 }
