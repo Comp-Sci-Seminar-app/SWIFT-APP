@@ -62,8 +62,8 @@ struct widgetEntryView : View {
                     .aspectRatio(contentMode: .fill)
             }
             VStack{
-                Text((String)(f.responses.current.temp_f ) + " F")
-                Text((String)(test))
+                Text("42.3 F")
+                Text("Sunny")
             }
         }
     }
