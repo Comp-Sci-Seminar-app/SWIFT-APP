@@ -64,7 +64,7 @@ struct widgetEntryView : View {
             VStack{
                 Text("42.3 F")
                 Text("Sunny")
-            }
+            }.font(.system(size: 26))
         }
     }
 }
